@@ -1,0 +1,23 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100vh;
+
+    .header, .footer {
+        display: flex;
+        justify-content: center;
+        background-color: lightgreen;
+    }
+
+    .card-wrapper {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        
+        .card {
+            margin-right: 20px;
+        }
+    }
+
+}
