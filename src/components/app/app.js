@@ -1,6 +1,7 @@
 import React from 'react';
 
 import TaskList from '../task-list';
+import SearchBar from '../searchBar';
 import WithTaskService from '../hoc';
 
 import 'materialize-css/dist/css/materialize.min.css';
@@ -14,7 +15,8 @@ const App = ({TaskService}) => {
             <header className="header">
                 <nav>
                     <div className="nav-wrapper">
-                        <span className="brand-logo">Task manager app</span>
+                        {/* <span className="brand-logo">Task manager app</span> */}
+                        <SearchBar />
                     </div>
                 </nav>
             </header>
