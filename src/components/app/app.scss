@@ -12,12 +12,36 @@
 
     .card-wrapper {
         display: flex;
-        justify-content: center;
+        justify-content: flex-start;
         flex-wrap: wrap;
         
         .card {
             margin-right: 20px;
+            min-width: 200px;
+            max-width: 30%;
         }
     }
 
+}
+
+@media screen and (max-width: 802px) {
+    .wrapper {
+        .card-wrapper {
+            .card {
+                max-width: 45%;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 520px) {
+    .wrapper {
+        .card-wrapper {
+            flex-direction: column;
+            align-items: center;
+            .card {
+                max-width: 80%;
+            }
+        }
+    }
 }
