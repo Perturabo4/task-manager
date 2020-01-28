@@ -4,10 +4,17 @@
     justify-content: space-between;
     height: 100vh;
 
-    .header, .footer {
+    .header nav{
+        padding: 0 20px;
+    }
+
+    .header {
         display: flex;
         justify-content: center;
-        background-color: lightgreen;
+    }
+
+    .page-footer {
+        padding: 20px;
     }
 
     .card-wrapper {

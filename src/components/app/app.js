@@ -9,7 +9,11 @@ const App = () => {
     return (
         <div className="wrapper">
             <header className="header">
-                <h1>Task manager app</h1>
+                <nav>
+                    <div class="nav-wrapper">
+                    <a href="#" class="brand-logo">Task manager app</a>
+                    </div>
+                </nav>
             </header>
             <main>
                 <div className="container">
@@ -23,9 +27,10 @@ const App = () => {
                     </div>
                 </div>
             </main>
-            <footer className="footer">
-                Created by Viktor Soshko
+            <footer class="page-footer">
+                    &copy; 2020 Created by Viktor Soshko
             </footer>
+            
         </div>
     )
 }
