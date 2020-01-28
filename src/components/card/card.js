@@ -1,16 +1,15 @@
 import React from 'react';
 import './card.scss';
 
-const Card = ({imgSrc}) => {
+const Card = ( { imgSrc, title, text } ) => {
     return (
         <div className="card">
             <div className="card-image">
-                <img src={imgSrc} />
-                <span className="card-title">Card Title</span>
+                <img src={ imgSrc } alt="IMG"/>
+                <span className="card-title">{ title }</span>
             </div>
             <div className="card-content">
-                <p>I am a very simple card. I am good at containing small bits of information.
-                I am convenient because I require little markup to use effectively.</p>
+                <p>{ text }</p>
             </div>
         </div>
     )

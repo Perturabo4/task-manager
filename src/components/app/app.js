@@ -1,11 +1,13 @@
 import React from 'react';
 import Card from '../card';
+import WithTaskService from '../hoc';
 
 import 'materialize-css/dist/css/materialize.min.css';
 import 'materialize-css/dist/js/materialize.min.js';
 import './app.scss';
 
-const App = () => {
+const App = ({TaskService}) => {
+    console.log(TaskService.getTasks());
     return (
         <div className="wrapper">
             <header className="header">
@@ -35,4 +37,4 @@ const App = () => {
     )
 }
 
-export default App;
+export default WithTaskService()(App);

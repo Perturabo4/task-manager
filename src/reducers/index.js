@@ -1,5 +1,7 @@
 const initialState = {
-    tasks: []
+    tasks: [
+        {}
+    ]
 };
 
 const reducer = (state = initialState, action) => {
@@ -8,9 +10,11 @@ const reducer = (state = initialState, action) => {
         case 'TASKS_LOADED':
             return {
                 tasks: action.payload
-            }
+            };
+        default:
+            return state;
     }
-    return state;
+
 }
 
 export default reducer;

@@ -4,13 +4,15 @@ import {TaskServiceConsumer} from '../task-service-context';
 
 const WithTaskService = () => (Wrapped) => {
     return (props) => {
-        <TaskServiceConsumer>
-            {
-                (TaskService) => {
-                    return <Wrapped {...props} TaskService={TaskService} />
+        return (
+            <TaskServiceConsumer>
+                {
+                    (TaskService) => {
+                        return <Wrapped {...props} TaskService={TaskService} />
+                    }
                 }
-            }
-        </TaskServiceConsumer>
+            </TaskServiceConsumer>
+        )
     }
 }
 
