@@ -10,8 +10,8 @@ const App = () => {
         <div className="wrapper">
             <header className="header">
                 <nav>
-                    <div class="nav-wrapper">
-                    <a href="#" class="brand-logo">Task manager app</a>
+                    <div className="nav-wrapper">
+                        <span className="brand-logo">Task manager app</span>
                     </div>
                 </nav>
             </header>
@@ -27,7 +27,7 @@ const App = () => {
                     </div>
                 </div>
             </main>
-            <footer class="page-footer">
+            <footer className="page-footer">
                     &copy; 2020 Created by Viktor Soshko
             </footer>
             
