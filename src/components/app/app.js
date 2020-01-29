@@ -3,6 +3,7 @@ import React from 'react';
 import TaskList from '../task-list';
 import SearchBar from '../searchBar';
 import Spinner from '../spinner';
+import TopLine from '../top-line';
 import WithTaskService from '../hoc';
 
 import 'materialize-css/dist/css/materialize.min.css';
@@ -22,7 +23,7 @@ const App = ({TaskService}) => {
                 </nav>
             </header>
             <main>
-              
+                <TopLine />
                 <div className="container">
                     <div className="row">
                         <div className="col s12">
