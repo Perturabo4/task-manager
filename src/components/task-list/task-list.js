@@ -1,9 +1,16 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import {connect} from 'react-redux';
+import WithTaskService from '../hoc';
+import {tasksLoaded} from '../../actions';
 
 import Card from '../card';
 
-const TaskList = ({tasks}) => {
+const TaskList = ({tasks, TaskService, tasksLoaded}) => {
+
+    useEffect(() => {
+        tasksLoaded(TaskService.getTasks());
+    },[TaskService, tasksLoaded]);
+
     return (
         <>
            {
@@ -16,5 +23,6 @@ const TaskList = ({tasks}) => {
 }
 
 const mapStateToProps = ({tasks}) => ({tasks});
+const mapDispatchToProps = {tasksLoaded};
 
-export default connect(mapStateToProps)(TaskList);
+export default WithTaskService()(connect(mapStateToProps, mapDispatchToProps)(TaskList));

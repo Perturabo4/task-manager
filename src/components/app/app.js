@@ -4,14 +4,12 @@ import TaskList from '../task-list';
 import SearchBar from '../searchBar';
 import Spinner from '../spinner';
 import TopLine from '../top-line';
-import WithTaskService from '../hoc';
 
 import 'materialize-css/dist/css/materialize.min.css';
 import 'materialize-css/dist/js/materialize.min.js';
 import './app.scss';
 
-const App = ({TaskService}) => {
-    console.log(TaskService.getTasks());
+const App = () => {
     return (
         <div className="wrapper">
             <header className="header">
@@ -35,11 +33,10 @@ const App = ({TaskService}) => {
                 </div>
             </main>
             <footer className="page-footer">
-                    &copy; 2020 Created by Viktor Soshko
+                &copy; 2020 Created by Viktor Soshko
             </footer>
-            
         </div>
     )
 }
 
-export default WithTaskService()(App);
+export default App;
