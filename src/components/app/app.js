@@ -2,7 +2,6 @@ import React from 'react';
 
 import TaskList from '../task-list';
 import SearchBar from '../searchBar';
-import Spinner from '../spinner';
 import TopLine from '../top-line';
 
 import 'materialize-css/dist/css/materialize.min.css';

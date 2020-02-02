@@ -4,25 +4,35 @@ import WithTaskService from '../hoc';
 import {tasksLoaded} from '../../actions';
 
 import Card from '../card';
+import Spinner from '../spinner';
 
-const TaskList = ({tasks, TaskService, tasksLoaded}) => {
+const TaskList = ({load, tasks, TaskService, tasksLoaded}) => {
 
     useEffect(() => {
-        tasksLoaded(TaskService.getTasks());
+
+        TaskService.getTasks()
+            .then((data) => {
+                tasksLoaded(data);
+            });
+        
     },[TaskService, tasksLoaded]);
+
+    const isTask = tasks.length > 0;
 
     return (
         <>
            {
-                tasks.map((task, id) => {
-                    return <Card {...task} key={id}/>
-                })
+               load
+                ? <Spinner />
+                : isTask 
+                    ? tasks.map((task, id) => <Card {...task} key={id}/>)
+                    : <span>У Вас еще нет запланированных задач</span>
            }
         </>
     )
 }
 
-const mapStateToProps = ({tasks}) => ({tasks});
+const mapStateToProps = ({tasks, load}) => ({tasks, load});
 const mapDispatchToProps = {tasksLoaded};
 
 export default WithTaskService()(connect(mapStateToProps, mapDispatchToProps)(TaskList));
