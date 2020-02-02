@@ -5,6 +5,7 @@ import {tasksLoaded} from '../../actions';
 
 import Card from '../card';
 import Spinner from '../spinner';
+import './task-list.scss';
 
 const TaskList = ({load, tasks, TaskService, tasksLoaded}) => {
 
@@ -26,7 +27,7 @@ const TaskList = ({load, tasks, TaskService, tasksLoaded}) => {
                 ? <Spinner />
                 : isTask 
                     ? tasks.map((task, id) => <Card {...task} key={id}/>)
-                    : <span>У Вас еще нет запланированных задач</span>
+                    : <div className="no-tasks">Список задач пуст</div>
            }
         </>
     )
