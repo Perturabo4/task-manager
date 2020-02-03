@@ -37,6 +37,7 @@ export default class TaskService {
 
     getTasks() {
         return new Promise((resolve, reject) => {
+            this.data = [];
             setTimeout(() => {
                 resolve(this.data);
             }, 700);

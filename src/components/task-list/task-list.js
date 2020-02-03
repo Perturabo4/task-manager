@@ -2,6 +2,7 @@ import React, {useEffect} from 'react'
 import {connect} from 'react-redux';
 import WithTaskService from '../hoc';
 import {tasksLoaded} from '../../actions';
+import {compose} from '../../utils';
 
 import Card from '../card';
 import Spinner from '../spinner';
@@ -36,4 +37,7 @@ const TaskList = ({load, tasks, TaskService, tasksLoaded}) => {
 const mapStateToProps = ({tasks, load}) => ({tasks, load});
 const mapDispatchToProps = {tasksLoaded};
 
-export default WithTaskService()(connect(mapStateToProps, mapDispatchToProps)(TaskList));
+export default compose(
+    WithTaskService(),
+    connect(mapStateToProps, mapDispatchToProps)
+)(TaskList);
