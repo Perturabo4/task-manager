@@ -39,7 +39,8 @@ export default class TaskService {
         return new Promise((resolve, reject) => {
             this.data = [];
             setTimeout(() => {
-                resolve(this.data);
+                // resolve(this.data);
+                reject(new Error('Something went wrong'));
             }, 700);
         });
     }

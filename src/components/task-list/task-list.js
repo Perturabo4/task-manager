@@ -1,25 +1,34 @@
 import React, {useEffect} from 'react'
 import {connect} from 'react-redux';
 import WithTaskService from '../hoc';
-import {tasksLoaded} from '../../actions';
+import {tasksLoaded, tasksError} from '../../actions';
 import {compose} from '../../utils';
 
 import Card from '../card';
 import Spinner from '../spinner';
 import './task-list.scss';
 
-const TaskList = ({load, tasks, TaskService, tasksLoaded}) => {
+const TaskList = ({load, tasks, error, TaskService, tasksLoaded, tasksError}) => {
 
     useEffect(() => {
 
         TaskService.getTasks()
             .then((data) => {
                 tasksLoaded(data);
-            });
+            })
+            .catch((err) => tasksError(err));
         
-    },[TaskService, tasksLoaded]);
+    },[TaskService, tasksLoaded, tasksError]);
 
     const isTask = tasks.length > 0;
+
+    if(error) {
+        return (
+            <div className="error">
+                Произошла ошибка при загрузке 
+            </div>
+        );
+    }
 
     return (
         <>
@@ -31,11 +40,11 @@ const TaskList = ({load, tasks, TaskService, tasksLoaded}) => {
                     : <div className="no-tasks">Список задач пуст</div>
            }
         </>
-    )
+    );
 }
 
-const mapStateToProps = ({tasks, load}) => ({tasks, load});
-const mapDispatchToProps = {tasksLoaded};
+const mapStateToProps = ({tasks, load, error}) => ({tasks, load, error});
+const mapDispatchToProps = {tasksLoaded, tasksError};
 
 export default compose(
     WithTaskService(),

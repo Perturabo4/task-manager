@@ -5,4 +5,11 @@ const tasksLoaded = (newTasks) => {
     };
 };
 
-export {tasksLoaded};
+const tasksError = (error) => {
+    return {
+        type: 'TASKS_ERROR', 
+        payload: error
+    };
+};
+
+export {tasksLoaded, tasksError};

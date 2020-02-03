@@ -1,6 +1,14 @@
-.no-tasks {
+.no-tasks, 
+.error {
     margin: 0 auto;
     text-align: center;
     font-size: 2rem;
+}
+
+.no-tasks {
     color: #212121;
+}
+
+.error {
+    color: red;
 }
