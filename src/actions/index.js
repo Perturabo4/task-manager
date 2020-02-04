@@ -22,4 +22,11 @@ const fetchTasks = (dispatch, service) => () => {
         });
 }
 
-export { fetchTasks };
+const tasksEdit = (edit) => {
+    return {
+        type: 'TASKS_EDIT',
+        payload: edit
+    }
+}
+
+export { fetchTasks, tasksEdit };

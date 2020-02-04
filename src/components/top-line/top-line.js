@@ -1,10 +1,14 @@
 import React from 'react';
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
+
+import {tasksEdit} from '../../actions';
 import Button from '../button';
 import Select from '../select';
 
 import './top-line.scss';
 
-const TopLine = () => {
+const TopLine = ({tasksEdit}) => {
     return (
         <div className="container">
             <div className="top-line">
@@ -27,12 +31,20 @@ const TopLine = () => {
                     label='Приоритет'
                     value='all'
                 />
-                <Button 
+                <Button tasksEdit={tasksEdit}
                     color='red'
-                    text='Create'
+                    text='Добавить задачу'
                 />
             </div>
         </div>
     )
 }
-export default TopLine;
+
+const mapStateToProps = () => {
+    return {};
+}
+const mapDispatchToProps = (dispatch) => {
+    return bindActionCreators({tasksEdit}, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(TopLine);

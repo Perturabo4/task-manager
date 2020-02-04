@@ -3,6 +3,7 @@ import React from 'react';
 import TaskListContainer from '../task-list';
 import SearchBar from '../searchBar';
 import TopLine from '../top-line';
+import ModalForm from '../modal-form';
 
 import 'materialize-css/dist/css/materialize.min.css';
 import 'materialize-css/dist/js/materialize.min.js';
@@ -26,6 +27,7 @@ const App = () => {
                         <div className="col s12">
                             <div className="card-wrapper">
                                 <TaskListContainer />
+                                <ModalForm />
                             </div>
                         </div>
                     </div>

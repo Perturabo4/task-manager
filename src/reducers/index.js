@@ -1,7 +1,8 @@
 const initialState = {
     tasks: [],
     load: true,
-    error: null
+    error: null,
+    isEdit: false
 };
 
 const reducer = (state = initialState, action) => {
@@ -9,6 +10,7 @@ const reducer = (state = initialState, action) => {
     switch(action.type) {
         case 'TASKS_LOADED':
             return {
+                ...state,
                 error: null,
                 tasks: action.payload,
                 load: false
@@ -19,6 +21,11 @@ const reducer = (state = initialState, action) => {
                 load: false,
                 error: action.payload
             };
+        case 'TASKS_EDIT':
+            return {
+                ...state,
+                isEdit: action.payload
+            }
         default:
             return state;
     }
