@@ -1,24 +1,20 @@
 import React, {useEffect} from 'react'
 import {connect} from 'react-redux';
 import WithTaskService from '../hoc';
-import {tasksLoaded, tasksError} from '../../actions';
+import {fetchTasks} from '../../actions';
 import {compose} from '../../utils';
 
 import Card from '../card';
 import Spinner from '../spinner';
 import './task-list.scss';
 
-const TaskList = ({load, tasks, error, TaskService, tasksLoaded, tasksError}) => {
+const TaskList = ({load, tasks, error, fetchTasks }) => {
 
     useEffect(() => {
 
-        TaskService.getTasks()
-            .then((data) => {
-                tasksLoaded(data);
-            })
-            .catch((err) => tasksError(err));
+        fetchTasks();
         
-    },[TaskService, tasksLoaded, tasksError]);
+    },[fetchTasks]);
 
     const isTask = tasks.length > 0;
 
@@ -44,7 +40,12 @@ const TaskList = ({load, tasks, error, TaskService, tasksLoaded, tasksError}) =>
 }
 
 const mapStateToProps = ({tasks, load, error}) => ({tasks, load, error});
-const mapDispatchToProps = {tasksLoaded, tasksError};
+const mapDispatchToProps = (dispatch, { TaskService }) => {
+    
+    return {
+        fetchTasks: fetchTasks(dispatch, TaskService)
+    }
+};
 
 export default compose(
     WithTaskService(),

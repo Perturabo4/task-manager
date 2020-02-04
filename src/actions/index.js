@@ -12,4 +12,14 @@ const tasksError = (error) => {
     };
 };
 
-export {tasksLoaded, tasksError};
+const fetchTasks = (dispatch, service) => () => {
+    return service.getTasks()
+        .then((data) => {
+            dispatch(tasksLoaded(data));
+        })
+        .catch((err) => {
+            dispatch(tasksError(err));
+        });
+}
+
+export { fetchTasks };

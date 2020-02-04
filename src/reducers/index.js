@@ -9,7 +9,7 @@ const reducer = (state = initialState, action) => {
     switch(action.type) {
         case 'TASKS_LOADED':
             return {
-                ...state,
+                error: null,
                 tasks: action.payload,
                 load: false
             };
