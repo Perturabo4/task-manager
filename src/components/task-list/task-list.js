@@ -8,15 +8,7 @@ import Card from '../card';
 import Spinner from '../spinner';
 import './task-list.scss';
 
-const TaskList = ({load, tasks, error, fetchTasks }) => {
-
-    useEffect(() => {
-
-        fetchTasks();
-        
-    },[fetchTasks]);
-
-    const isTask = tasks.length > 0;
+const TaskList = ({error, load, tasks, isTask}) => {
 
     if(error) {
         return (
@@ -39,6 +31,24 @@ const TaskList = ({load, tasks, error, fetchTasks }) => {
     );
 }
 
+const TaskListContainer = ({load, tasks, error, fetchTasks }) => {
+
+    useEffect(() => {
+
+        fetchTasks();
+        
+    },[fetchTasks]);
+
+    const isTask = tasks.length > 0;
+
+    return <TaskList 
+                error={error}
+                load={load}
+                tasks={tasks}
+                isTask={isTask}
+             />
+}
+
 const mapStateToProps = ({tasks, load, error}) => ({tasks, load, error});
 const mapDispatchToProps = (dispatch, { TaskService }) => {
     
@@ -50,4 +60,4 @@ const mapDispatchToProps = (dispatch, { TaskService }) => {
 export default compose(
     WithTaskService(),
     connect(mapStateToProps, mapDispatchToProps)
-)(TaskList);
+)(TaskListContainer);

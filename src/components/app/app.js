@@ -1,6 +1,6 @@
 import React from 'react';
 
-import TaskList from '../task-list';
+import TaskListContainer from '../task-list';
 import SearchBar from '../searchBar';
 import TopLine from '../top-line';
 
@@ -25,7 +25,7 @@ const App = () => {
                     <div className="row">
                         <div className="col s12">
                             <div className="card-wrapper">
-                                <TaskList />
+                                <TaskListContainer />
                             </div>
                         </div>
                     </div>
