@@ -31,7 +31,7 @@ const TopLine = ({tasksEdit}) => {
                     label='Приоритет'
                     value='all'
                 />
-                <Button tasksEdit={tasksEdit}
+                <Button onClick={() => tasksEdit(true)}
                     color='red'
                     text='Добавить задачу'
                 />

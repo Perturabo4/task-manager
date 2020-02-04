@@ -1,9 +1,9 @@
 import React from 'react';
 
-const Button = ({color='red', text='button', tasksEdit}) => {
+const Button = ({color='red', text='button', onClick}) => {
     return (
         <button 
-            onClick={() => tasksEdit(true)}
+            onClick={() => onClick()}
             className={`btn waves-effect waves-light ${color}`} 
             name="action">
                 {text}
