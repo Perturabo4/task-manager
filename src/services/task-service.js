@@ -37,7 +37,7 @@ export default class TaskService {
 
     getTasks() {
         return new Promise((resolve, reject) => {
-            this.data = [];
+            // this.data = [];
             setTimeout(() => {
                 resolve(this.data);
                 // reject(new Error('Something went wrong'));
