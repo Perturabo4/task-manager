@@ -1,5 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import Button from '../button';
 import {tasksEdit} from '../../actions';
 import './modal-form.scss';
 
@@ -15,15 +16,13 @@ const ModalForm = ({isEdit, tasksEdit}) => {
                     <p>A bunch of text</p>
                 </div>
                 <div className="modal-footer">
-                    <button 
-                        className="modal-save waves-effect waves-red btn red">
-                            Сохранить
-                    </button>
-                    <button 
-                        onClick={() => tasksEdit(false)}
-                        className="modal-cancel waves-effect waves-red btn red">
-                            Отмена
-                    </button>
+                    <Button 
+                        text="Сохранить"
+                    />
+                    <Button 
+                        text="Отмена"
+                        onClick={() => tasksEdit()}
+                    />
                 </div>
             </div>
         </div>
