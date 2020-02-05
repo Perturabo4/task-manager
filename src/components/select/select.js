@@ -3,11 +3,11 @@ import {Select as SelectList} from 'react-materialize';
 
 import './select.scss';
 
-const Select = ({opt = {}, cls = [], label, value}) => {
+const Select = ({opt = {}, cls = [], label, value, onChange}) => {
     cls = cls.join(' ');
     return (
         <SelectList
-            onChange={function noRefCheck(){}}
+            onChange={(e) => onChange(e)}
             options={{
                 classes: cls,
             }}

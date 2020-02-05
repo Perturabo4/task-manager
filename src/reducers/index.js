@@ -2,7 +2,15 @@ const initialState = {
     tasks: [],
     load: true,
     error: null,
-    isEdit: false
+    isEdit: false,
+    newTask: {
+        id: '',
+        title: '',
+        text: '',
+        imgSrc: '',
+        priority: 'all',
+        done: false
+    }
 };
 
 const reducer = (state = initialState, action) => {
@@ -24,7 +32,60 @@ const reducer = (state = initialState, action) => {
         case 'TASKS_EDIT':
             return {
                 ...state,
-                isEdit: action.payload
+                isEdit: action.payload,
+                newTask: {
+                    id: '',
+                    title: '',
+                    text: '',
+                    imgSrc: '',
+                    priority: 'all',
+                    done: false
+                }
+            }
+        case 'SET_TITLE':
+            return {
+                ...state,
+                newTask: {
+                    ...state.newTask,
+                    title: action.payload
+                }
+            }
+        case 'SET_TEXT':
+            return {
+                ...state,
+                newTask: {
+                    ...state.newTask,
+                    text: action.payload
+                }
+            }
+        case 'SET_IMG':
+            return {
+                ...state,
+                newTask: {
+                    ...state.newTask,
+                    imgSrc: action.payload
+                }
+            }
+        case 'SET_PRIORITY':
+            return {
+                ...state,
+                newTask: {
+                    ...state.newTask,
+                    priority: action.payload
+                }
+            }
+        case 'TASKS_SAVE':
+            return {
+                ...state,
+                tasks: state.tasks.concat(action.payload),
+                newTask: {
+                    id: '',
+                    title: '',
+                    text: '',
+                    imgSrc: '',
+                    priority: 'all',
+                    done: false
+                }
             }
         default:
             return state;

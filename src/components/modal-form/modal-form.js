@@ -3,11 +3,11 @@ import {connect} from 'react-redux';
 import Button from '../button';
 import Input from '../input';
 import Select from '../select';
-import {tasksEdit} from '../../actions';
+import {tasksEdit, tasksSave, setTitle, setText, setImg, setPriority} from '../../actions';
 import './modal-form.scss';
 
-const ModalForm = ({isEdit, tasksEdit}) => {
-
+const ModalForm = ({isEdit, newTask, tasksEdit, tasksSave, setTitle, setText, setImg, setPriority }) => {
+    
     const styles = {display: isEdit ? 'block' : 'none'}
 
     return (
@@ -17,29 +17,42 @@ const ModalForm = ({isEdit, tasksEdit}) => {
                     <Input 
                         id="task_title"
                         label="Заголовок"
-                        onChange={(e) => console.log(e.target.value)}
+                        onChange={(e) => setTitle(e.target.value)}
+                        value={newTask.title}
                     />
                     <Input 
-                        id="task_title"
+                        id="task_text"
                         label="Текст задачи"
                         type="textarea"
-                        onChange={(e) => console.log(e.target.value)}
+                        onChange={(e) => setText(e.target.value)}
+                        value={newTask.text}
                     />
-                       <Select 
-                            opt={{
-                                all: 'Все',
-                                high: 'Высокий',
-                                normal: 'Средний',
-                                low: 'Низкий'
-                            }}
-                            cls={['s12']}
-                            label='Приоритет'
-                            value='all'
-                        />
+                      <Input 
+                        id="task_img_src"
+                        label="Ссылка на картинку"
+                        onChange={(e) => setImg(e.target.value)}
+                        value={newTask.imgSrc}
+                    />
+                    <Select 
+                        opt={{
+                            all: 'Все',
+                            high: 'Высокий',
+                            normal: 'Средний',
+                            low: 'Низкий'
+                        }}
+                        cls={['s12']}
+                        label='Приоритет'
+                        value={newTask.priority}
+                        onChange={(e) => setPriority(e.target.value)}
+                    />
                 </div>
                 <div className="modal-footer">
                     <Button 
                         text="Сохранить"
+                        onClick={() => {
+                            tasksSave(newTask);
+                            tasksEdit();
+                        }}
                     />
                     <Button 
                         text="Отмена"
@@ -51,12 +64,17 @@ const ModalForm = ({isEdit, tasksEdit}) => {
     )
 }
 
-const mapStateToProps = ({isEdit}) => {
-    return { isEdit };
+const mapStateToProps = ({isEdit, newTask}) => {
+    return { isEdit, newTask };
 }
 
 const mapDispatchToProps = {
-    tasksEdit
+    tasksEdit,
+    tasksSave,
+    setTitle,
+    setText,
+    setImg,
+    setPriority
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ModalForm);

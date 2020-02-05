@@ -1,6 +1,6 @@
 import React from 'react';
 
-const CheckType = ({id, type, cls=[], onChange}) => {
+const CheckType = ({id, type, cls=[], onChange, value}) => {
     const classes = cls.join(' ');
     switch (type) {
             
@@ -9,7 +9,8 @@ const CheckType = ({id, type, cls=[], onChange}) => {
                 <textarea 
                     id={id} 
                     className={`materialize-textarea ${classes}`}
-                    onChange={onChange}>
+                    onChange={onChange}
+                    value={value}>
                 </textarea> 
             );
         default :
@@ -18,7 +19,8 @@ const CheckType = ({id, type, cls=[], onChange}) => {
                     id={id} 
                     type="text" 
                     className={`validate ${classes}`}
-                    onChange={onChange} 
+                    onChange={onChange}
+                    value={value} 
                 />
             );
     }

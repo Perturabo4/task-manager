@@ -29,4 +29,45 @@ const tasksEdit = (edit) => {
     }
 }
 
-export { fetchTasks, tasksEdit };
+const setTitle = (title) => {
+    return {
+        type: 'SET_TITLE',
+        payload: title
+    }
+}
+
+const setText = (text) => {
+    return {
+        type: 'SET_TEXT',
+        payload: text
+    }
+}
+
+const setImg = (imgSrc) => {
+    return {
+        type: 'SET_IMG',
+        payload: imgSrc
+    }
+}
+
+const setPriority = (priority) => {
+    return {
+        type: 'SET_PRIORITY',
+        payload: priority
+    }
+}
+
+const tasksSave = (obj) => {
+    return {
+        type: 'TASKS_SAVE',
+        payload: obj
+    }
+}
+
+export { fetchTasks,
+         tasksEdit,
+         tasksSave,
+         setTitle,
+         setText,
+         setImg,
+         setPriority };
