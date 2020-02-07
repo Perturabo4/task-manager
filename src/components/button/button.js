@@ -7,7 +7,7 @@ const Button = ({cls=['red'], text='button', onClick}) => {
             onClick={() => onClick()}
             className={`btn waves-effect waves-light ${classes}`} 
             name="action">
-                {text}
+            {text}
         </button>
     )
 }

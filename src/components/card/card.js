@@ -1,5 +1,6 @@
 import React from 'react';
-import Button from '../button';
+
+import Dropdown from '../dropdown';
 import './card.scss';
 
 const Card = ( { imgSrc, title, text } ) => {
@@ -13,11 +14,7 @@ const Card = ( { imgSrc, title, text } ) => {
                 <p>{ text }</p>
             </div>
             <div className="card-action">
-                <Button 
-                    text="..."
-                    onClick={() => {}}
-                    cls={['btn-small', 'red']}
-                />
+                <Dropdown />
             </div>
         </div>
     )
