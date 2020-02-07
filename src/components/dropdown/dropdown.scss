@@ -1,0 +1,12 @@
+.dropdown-wrapper {
+
+    position: relative;
+    display: inline-block;
+
+    &.active {
+        .dropdown-content {
+            display: block;
+            opacity: 1;
+        }
+    }
+}

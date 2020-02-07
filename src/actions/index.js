@@ -64,10 +64,18 @@ const tasksSave = (obj) => {
     }
 }
 
+const taskOpen = (id) => {
+    return {
+        type: 'TASK_OPEN',
+        payload: id
+    }
+}
+
 export { fetchTasks,
          tasksEdit,
          tasksSave,
          setTitle,
          setText,
          setImg,
-         setPriority };
+         setPriority,
+         taskOpen };

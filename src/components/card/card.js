@@ -3,7 +3,7 @@ import React from 'react';
 import Dropdown from '../dropdown';
 import './card.scss';
 
-const Card = ( { imgSrc, title, text } ) => {
+const Card = ( { id, imgSrc, title, text, open } ) => {
     return (
         <div className="card">
             <div className="card-image">
@@ -14,7 +14,7 @@ const Card = ( { imgSrc, title, text } ) => {
                 <p>{ text }</p>
             </div>
             <div className="card-action">
-                <Dropdown />
+                <Dropdown open={open} id={id} />
             </div>
         </div>
     )

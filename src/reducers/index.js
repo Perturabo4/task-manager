@@ -9,9 +9,24 @@ const initialState = {
         text: '',
         imgSrc: '',
         priority: 'all',
-        done: false
+        done: false,
+        open: false
     }
 };
+
+const setEdit = (tasks, id) => {
+    console.log(id);
+    return tasks.map(task => {
+        if( task.id == id) {
+            task.edit = true;
+
+            return task;
+        } 
+
+        task.edit = false;
+        return task;
+    })
+} 
 
 const reducer = (state = initialState, action) => {
 
@@ -39,8 +54,14 @@ const reducer = (state = initialState, action) => {
                     text: '',
                     imgSrc: '',
                     priority: 'all',
-                    done: false
+                    done: false,
+                    open: false
                 }
+            }
+        case 'TASK_OPEN':
+            return {
+                ...state,
+                tasks: setEdit(state.tasks, action.payload)
             }
         case 'SET_TITLE':
             return {
@@ -84,7 +105,8 @@ const reducer = (state = initialState, action) => {
                     text: '',
                     imgSrc: '',
                     priority: 'all',
-                    done: false
+                    done: false,
+                    open: false
                 }
             }
         default:
