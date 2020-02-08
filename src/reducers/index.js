@@ -19,20 +19,7 @@ function getEmptyTask () {
 }
 
 const setEdit = (tasks, id) => {
-    
-    return tasks.map(task => {
-        if( task.id === id) {
-            return {
-                ...task,
-                open: true
-            }
-        } 
-
-        return {
-            ...task,
-            open: false
-        }
-    })
+    return tasks.map(task => ({...task, open: task.id === id}));
 } 
 
 const reducer = (state = initialState, action) => {

@@ -4,7 +4,10 @@ const Button = ({cls=['red'], text='button', onClick}) => {
     const classes = cls.join(' ');
     return (
         <button 
-            onClick={() => onClick()}
+            onClick={(e) => {
+                e.stopPropagation();
+                onClick();
+            }}
             className={`btn waves-effect waves-light ${classes}`} 
             name="action">
             {text}
