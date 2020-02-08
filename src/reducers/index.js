@@ -22,6 +22,10 @@ const setEdit = (tasks, id) => {
     return tasks.map(task => ({...task, open: task.id === id}));
 } 
 
+const setDone = (tasks, id) => {
+    return tasks.map(task => ({...task, done: task.id === id}));
+} 
+
 const deleteTask = (tasks, id) => {
     return tasks.filter( task => task.id !== id);
 }
@@ -57,6 +61,16 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 tasks: deleteTask(state.tasks, action.payload)
+            }
+        case 'TASK_COMPLETED':
+            return {
+                ...state,
+                tasks: deleteTask(state.tasks, action.payload)
+            }
+        case 'TASK_DONE':
+            return {
+                ...state,
+                tasks: setDone(state.tasks, action.payload)
             }
         case 'SET_TITLE':
             return {

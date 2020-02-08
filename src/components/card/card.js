@@ -3,7 +3,7 @@ import React from 'react';
 import Dropdown from '../dropdown';
 import './card.scss';
 
-const Card = ( { id, imgSrc, title, text, open } ) => {
+const Card = ( { id, imgSrc, title, text, open, done } ) => {
     return (
         <div className="card">
             <div className="card-image">
