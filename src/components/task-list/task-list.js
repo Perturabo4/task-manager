@@ -31,7 +31,7 @@ const TaskList = ({error, load, tasks, isTask}) => {
     );
 }
 
-const TaskListContainer = ({load, tasks, error, fetchTasks }) => {
+const TaskListContainer = ({ load, tasks, error, fetchTasks }) => {
 
     useEffect(() => {
 

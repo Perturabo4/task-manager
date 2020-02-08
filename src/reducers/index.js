@@ -3,7 +3,11 @@ const initialState = {
     load: true,
     error: null,
     isEdit: false,
-    newTask: {
+    newTask: getEmptyTask ()
+};
+
+function getEmptyTask () {
+    return {
         id: '',
         title: '',
         text: '',
@@ -12,19 +16,22 @@ const initialState = {
         done: false,
         open: false
     }
-};
+}
 
 const setEdit = (tasks, id) => {
-    console.log(id);
+    
     return tasks.map(task => {
-        if( task.id == id) {
-            task.edit = true;
-
-            return task;
+        if( task.id === id) {
+            return {
+                ...task,
+                open: true
+            }
         } 
 
-        task.edit = false;
-        return task;
+        return {
+            ...task,
+            open: false
+        }
     })
 } 
 
@@ -47,16 +54,7 @@ const reducer = (state = initialState, action) => {
         case 'TASKS_EDIT':
             return {
                 ...state,
-                isEdit: action.payload,
-                newTask: {
-                    id: '',
-                    title: '',
-                    text: '',
-                    imgSrc: '',
-                    priority: 'all',
-                    done: false,
-                    open: false
-                }
+                isEdit: action.payload
             }
         case 'TASK_OPEN':
             return {
@@ -99,15 +97,7 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 tasks: state.tasks.concat(action.payload),
-                newTask: {
-                    id: '',
-                    title: '',
-                    text: '',
-                    imgSrc: '',
-                    priority: 'all',
-                    done: false,
-                    open: false
-                }
+                newTask: getEmptyTask()
             }
         default:
             return state;
