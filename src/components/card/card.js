@@ -1,11 +1,14 @@
 import React from 'react';
 
+import CheckBox from '../check-box';
 import Dropdown from '../dropdown';
 import './card.scss';
+
 
 const Card = ( { id, imgSrc, title, text, open, done } ) => {
     return (
         <div className="card">
+            {done && <CheckBox />}
             <div className="card-image">
                 <img src={ imgSrc } alt="IMG"/>
                 <span className="card-title">{ title }</span>

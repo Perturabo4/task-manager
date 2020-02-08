@@ -1,4 +1,13 @@
-.card-action {
-    display: flex;
-    justify-content: flex-end;
+.card {
+    label {
+        position: absolute;
+        z-index: 100;
+        right: 0;
+        transform: translate(60%, -20%);
+    }
+
+    .card-action {
+        display: flex;
+        justify-content: flex-end;
+    }
 }
