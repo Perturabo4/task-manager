@@ -71,6 +71,13 @@ const taskOpen = (id) => {
     }
 }
 
+const taskDelete = (id) => {
+    return {
+        type: 'TASK_DELETE',
+        payload: id
+    }
+}
+
 export { fetchTasks,
          tasksEdit,
          tasksSave,
@@ -78,4 +85,5 @@ export { fetchTasks,
          setText,
          setImg,
          setPriority,
-         taskOpen };
+         taskOpen,
+         taskDelete };

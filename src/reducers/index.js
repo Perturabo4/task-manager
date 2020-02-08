@@ -22,6 +22,10 @@ const setEdit = (tasks, id) => {
     return tasks.map(task => ({...task, open: task.id === id}));
 } 
 
+const deleteTask = (tasks, id) => {
+    return tasks.filter( task => task.id !== id);
+}
+
 const reducer = (state = initialState, action) => {
 
     switch(action.type) {
@@ -48,6 +52,11 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 tasks: setEdit(state.tasks, action.payload)
+            }
+        case 'TASK_DELETE':
+            return {
+                ...state,
+                tasks: deleteTask(state.tasks, action.payload)
             }
         case 'SET_TITLE':
             return {
