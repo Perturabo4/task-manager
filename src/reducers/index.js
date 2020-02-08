@@ -54,7 +54,8 @@ const reducer = (state = initialState, action) => {
         case 'TASKS_EDIT':
             return {
                 ...state,
-                isEdit: action.payload
+                isEdit: action.payload,
+                newTask: getEmptyTask()
             }
         case 'TASK_OPEN':
             return {
@@ -96,8 +97,7 @@ const reducer = (state = initialState, action) => {
         case 'TASKS_SAVE':
             return {
                 ...state,
-                tasks: state.tasks.concat(action.payload),
-                newTask: getEmptyTask()
+                tasks: state.tasks.concat(action.payload)
             }
         default:
             return state;
