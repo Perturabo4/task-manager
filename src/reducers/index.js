@@ -23,7 +23,11 @@ const setEdit = (tasks, id) => {
 } 
 
 const setDone = (tasks, id) => {
-    return tasks.map(task => ({...task, done: task.id === id}));
+    
+    return tasks.map(task => {
+        const done = task.id === id ? !task.done : task.done;
+        return { ...task, done }
+    });
 } 
 
 const deleteTask = (tasks, id) => {

@@ -1,14 +1,17 @@
 import React from 'react';
+import {connect} from 'react-redux';
 
+import {taskDone} from '../../actions';
 import CheckBox from '../check-box';
 import Dropdown from '../dropdown';
 import './card.scss';
 
 
-const Card = ( { id, imgSrc, title, text, open, done } ) => {
+const Card = ( {task, taskDone } ) => {
+    const {done, imgSrc, title, text, id, open} = task;
     return (
         <div className="card">
-            {done && <CheckBox />}
+            {done && <CheckBox onChange={() => taskDone(id)}/>}
             <div className="card-image">
                 <img src={ imgSrc } alt="IMG"/>
                 <span className="card-title">{ title }</span>
@@ -17,10 +20,18 @@ const Card = ( { id, imgSrc, title, text, open, done } ) => {
                 <p>{ text }</p>
             </div>
             <div className="card-action">
-                <Dropdown open={open} id={id} />
+                {!done && <Dropdown open={open} id={id} />}
             </div>
         </div>
     )
 }
 
-export default Card;
+const mapStateToProps = () => {
+    return {} 
+}
+
+const mapDispatchToProps = {
+    taskDone
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Card);

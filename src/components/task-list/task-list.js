@@ -24,7 +24,7 @@ const TaskList = ({error, load, tasks, isTask}) => {
                load
                 ? <Spinner />
                 : isTask 
-                    ? tasks.map((task, id) => <Card {...task} key={id}/>)
+                    ? tasks.map((task, id) => <Card task={task} key={id} />)
                     : <div className="no-tasks">Список задач пуст</div>
            }
         </>

@@ -5,7 +5,7 @@ import Button from '../button';
 
 import './dropdown.scss';
 
-const Dropdown = ({open, id, taskOpen, taskDelete}) => {
+const Dropdown = ({open, id, taskOpen, taskDelete, taskDone}) => {
     return (
         <div className={`dropdown-wrapper ${open ? 'active' : ''}`}>
             <Button
