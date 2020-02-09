@@ -33,7 +33,12 @@ return (
         <CheckType 
             {...props}
         />
-        <label htmlFor={props.id}>{props.label}</label>
+        <label 
+            htmlFor={props.id} 
+            className={props.value && 'active'}
+        >
+            {props.label}
+        </label>
     </div>
     );
 }
