@@ -3,10 +3,10 @@ import {connect} from 'react-redux';
 import Button from '../button';
 import Input from '../input';
 import Select from '../select';
-import {tasksEdit, tasksSave, setTitle, setText, setImg, setPriority} from '../../actions';
+import {addTask, tasksSave, setTitle, setText, setImg, setPriority} from '../../actions';
 import './modal-form.scss';
 
-const ModalForm = ({isEdit, newTask, tasksEdit, tasksSave, setTitle, setText, setImg, setPriority }) => {
+const ModalForm = ({isEdit, newTask, addTask, tasksSave, setTitle, setText, setImg, setPriority }) => {
     
     const styles = {display: isEdit ? 'block' : 'none'}
 
@@ -27,7 +27,7 @@ const ModalForm = ({isEdit, newTask, tasksEdit, tasksSave, setTitle, setText, se
                         onChange={(e) => setText(e.target.value)}
                         value={newTask.text}
                     />
-                      <Input 
+                    <Input 
                         id="task_img_src"
                         label="Ссылка на картинку"
                         onChange={(e) => setImg(e.target.value)}
@@ -51,12 +51,12 @@ const ModalForm = ({isEdit, newTask, tasksEdit, tasksSave, setTitle, setText, se
                         text="Сохранить"
                         onClick={() => {
                             tasksSave(newTask);
-                            tasksEdit();
+                            addTask();
                         }}
                     />
                     <Button 
                         text="Отмена"
-                        onClick={() => tasksEdit()}
+                        onClick={() => addTask()}
                     />
                 </div>
             </div>
@@ -69,7 +69,7 @@ const mapStateToProps = ({isEdit, newTask}) => {
 }
 
 const mapDispatchToProps = {
-    tasksEdit,
+    addTask,
     tasksSave,
     setTitle,
     setText,

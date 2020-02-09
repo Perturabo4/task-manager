@@ -1,11 +1,11 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {taskOpen, taskDelete, taskDone} from '../../actions';
+import {taskOpen, taskDelete, taskDone, taskEdit} from '../../actions';
 import Button from '../button';
 
 import './dropdown.scss';
 
-const Dropdown = ({open, id, taskOpen, taskDelete, taskDone}) => {
+const Dropdown = ({open, id, taskOpen, taskDelete, taskDone, taskEdit}) => {
     return (
         <div className={`dropdown-wrapper ${open ? 'active' : ''}`}>
             <Button
@@ -18,7 +18,9 @@ const Dropdown = ({open, id, taskOpen, taskDelete, taskDone}) => {
                     <span>Выполнено</span>
                 </li>
                 <li className="divider" tabIndex="-1"></li>
-                <li><span>Редактировать</span></li>
+                <li onClick={() => taskEdit(id)}>
+                    <span>Редактировать</span>
+                </li>
                 <li className="divider" tabIndex="-1"></li>
                 <li onClick={() => taskDelete(id)}>
                     <span>Удалить</span>
@@ -33,7 +35,8 @@ const mapStateToProps = () => ({});
 const mapDispatchToProps = {
     taskOpen,
     taskDelete,
-    taskDone
+    taskDone,
+    taskEdit
 };
 
 export default  connect(mapStateToProps, mapDispatchToProps)(Dropdown);

@@ -22,9 +22,9 @@ const fetchTasks = (dispatch, service) => () => {
         });
 }
 
-const tasksEdit = (edit) => {
+const addTask = (edit) => {
     return {
-        type: 'TASKS_EDIT',
+        type: 'ADD_TASK',
         payload: edit
     }
 }
@@ -78,6 +78,13 @@ const taskDelete = (id) => {
     }
 }
 
+const taskEdit = (id) => {
+    return {
+        type: 'TASK_EDIT',
+        payload: id
+    }
+}
+
 const taskDone = (id) => {
     return {
         type: 'TASK_DONE',
@@ -86,7 +93,7 @@ const taskDone = (id) => {
 }
 
 export { fetchTasks,
-         tasksEdit,
+         addTask,
          tasksSave,
          setTitle,
          setText,
@@ -94,4 +101,5 @@ export { fetchTasks,
          setPriority,
          taskOpen,
          taskDelete,
-         taskDone };
+         taskDone,
+         taskEdit };

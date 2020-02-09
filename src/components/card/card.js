@@ -6,7 +6,6 @@ import CheckBox from '../check-box';
 import Dropdown from '../dropdown';
 import './card.scss';
 
-
 const Priority = ({priority}) => {
     const text = {low: 'Низкая', normal: 'Средняя', high: 'Высокая'};
     const color = {low: 'green', normal: 'orange', high: 'red'};

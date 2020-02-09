@@ -8,7 +8,7 @@ const initialState = {
 
 function getEmptyTask () {
     return {
-        id: '',
+        id: new Date().getTime(),
         title: '',
         text: '',
         imgSrc: '',
@@ -16,6 +16,13 @@ function getEmptyTask () {
         done: false,
         open: false
     }
+}
+const getTaskToEdit = (tasks, id) => {
+    if(!id) return getEmptyTask();
+
+    const taskToEdit = tasks.filter(task => task.id === id);
+
+    return taskToEdit[0];
 }
 
 const setEdit = (tasks, id) => {
@@ -34,6 +41,14 @@ const deleteTask = (tasks, id) => {
     return tasks.filter( task => task.id !== id);
 }
 
+const saveTask = (tasks, newTask) => {
+    const index = tasks.findIndex(({id}) => id === newTask.id);
+
+    return index >= 0
+            ? [...tasks.slice(0, index), newTask, ...tasks.slice(index + 1)]
+            : [newTask, ...tasks];
+}
+
 const reducer = (state = initialState, action) => {
 
     switch(action.type) {
@@ -50,7 +65,7 @@ const reducer = (state = initialState, action) => {
                 load: false,
                 error: action.payload
             };
-        case 'TASKS_EDIT':
+        case 'ADD_TASK':
             return {
                 ...state,
                 isEdit: action.payload,
@@ -66,10 +81,11 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 tasks: deleteTask(state.tasks, action.payload)
             }
-        case 'TASK_COMPLETED':
+        case 'TASK_EDIT':
             return {
                 ...state,
-                tasks: deleteTask(state.tasks, action.payload)
+                isEdit: true,
+                newTask: getTaskToEdit(state.tasks, action.payload)
             }
         case 'TASK_DONE':
             return {
@@ -111,7 +127,7 @@ const reducer = (state = initialState, action) => {
         case 'TASKS_SAVE':
             return {
                 ...state,
-                tasks: state.tasks.concat(action.payload)
+                tasks: saveTask(state.tasks, action.payload)
             }
         default:
             return state;
