@@ -21,14 +21,13 @@ const Priority = ({priority}) => {
             </span>
         </span>
     );
-    
 }
-
 
 const Card = ( {task, taskDone } ) => {
     const {done, imgSrc, title, text, id, open, priority} = task;
     return (
-        <div className="card">
+        <div className={`card ${done ? 'done': ''}`}>
+            <div className="card-shadow"></div>
             {done && <CheckBox onChange={() => taskDone(id)}/>}
             <div className="card-image">
                 <img src={ imgSrc } alt="IMG"/>
