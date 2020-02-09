@@ -8,6 +8,22 @@ import Card from '../card';
 import Spinner from '../spinner';
 import './task-list.scss';
 
+const getVisibilityTasks = (tasks, filters) => {
+    let filteredTasks = [...tasks];
+
+    if(filters.taskTitle.trim()) {
+        filteredTasks = filteredTasks.filter( task => task.title === filters.taskTitle);
+    }
+    if(filters.done !== 'all') {
+        filteredTasks = filteredTasks.filter( task => task.done === filters.done);
+    }
+    if(filters.priority !== 'all') {
+        filteredTasks = filteredTasks.filter( task => task.priority === filters.priority);
+    }
+
+    return filteredTasks;
+}
+
 const TaskList = ({error, load, tasks, isTask}) => {
 
     if(error) {
@@ -49,7 +65,14 @@ const TaskListContainer = ({ load, tasks, error, fetchTasks }) => {
              />
 }
 
-const mapStateToProps = ({tasks, load, error}) => ({tasks, load, error});
+const mapStateToProps = ({tasks, load, error, filters}) => {
+
+    return {
+        tasks: getVisibilityTasks(tasks, filters), 
+        load, 
+        error
+    };
+}
 const mapDispatchToProps = (dispatch, { TaskService }) => {
     
     return {

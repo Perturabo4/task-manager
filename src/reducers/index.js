@@ -3,7 +3,12 @@ const initialState = {
     load: true,
     error: null,
     isEdit: false,
-    newTask: getEmptyTask ()
+    newTask: getEmptyTask (),
+    filters: {
+        done: 'all',
+        priority: 'all',
+        taskTitle: ''
+    }
 };
 
 function getEmptyTask () {
@@ -13,7 +18,7 @@ function getEmptyTask () {
         text: '',
         imgSrc: '',
         priority: 'all',
-        done: false,
+        done: 'undone',
         open: false
     }
 }
@@ -128,6 +133,21 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 tasks: saveTask(state.tasks, action.payload)
+            }
+        case 'FILTER_DONE':
+            return {
+                ...state,
+                filters: {...state.filters, done: action.payload}
+            }
+        case 'FILTER_PRIORITY':
+            return {
+                ...state,
+                filters: {...state.filters, priority: action.payload}
+            }
+        case 'FILTER_TITLE':
+            return {
+                ...state,
+                filters: {...state.filters, taskTitle: action.payload}
             }
         default:
             return state;

@@ -2,24 +2,27 @@ import React from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 
-import {addTask} from '../../actions';
+import {addTask, 
+        filterDone, 
+        filterPriority } from '../../actions';
 import Button from '../button';
 import Select from '../select';
 
 import './top-line.scss';
 
-const TopLine = ({addTask}) => {
+const TopLine = ({filters, filterDone, filterPriority, addTask}) => {
     return (
         <div className="container">
             <div className="top-line">
-            <Select 
+                <Select 
                     opt={{
                         all: 'Все',
-                        open: 'Открытые',
+                        undone: 'Открытые',
                         done: 'Выполненные',
                     }}
                     label='Состояние'
-                    value='all'
+                    value={filters.done}
+                    onChange={(e) => filterDone(e.target.value)}
                 />
                 <Select 
                     opt={{
@@ -29,7 +32,8 @@ const TopLine = ({addTask}) => {
                         low: 'Низкий'
                     }}
                     label='Приоритет'
-                    value='all'
+                    value={filters.priority}
+                    onChange={(e) => filterPriority(e.target.value)}
                 />
                 <Button onClick={() => addTask(true)}
                     color='red'
@@ -40,11 +44,16 @@ const TopLine = ({addTask}) => {
     )
 }
 
-const mapStateToProps = () => {
-    return {};
+const mapStateToProps = ({filters}) => {
+    return { filters };
 }
 const mapDispatchToProps = (dispatch) => {
-    return bindActionCreators({addTask}, dispatch);
+    return bindActionCreators(
+        {
+            addTask,
+            filterDone,
+            filterPriority
+        }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(TopLine);

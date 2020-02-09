@@ -92,6 +92,27 @@ const taskDone = (id) => {
     }
 }
 
+const filterDone = (value) => {
+    return {
+        type: 'FILTER_DONE',
+        payload: value
+    }
+}
+
+const filterPriority = (value) => {
+    return {
+        type: 'FILTER_PRIORITY',
+        payload: value
+    }
+}
+
+const filterTitle = (value) => {
+    return {
+        type: 'FILTER_TITLE',
+        payload: value
+    }
+}
+
 export { fetchTasks,
          addTask,
          tasksSave,
@@ -102,4 +123,7 @@ export { fetchTasks,
          taskOpen,
          taskDelete,
          taskDone,
-         taskEdit };
+         taskEdit,
+         filterDone,
+         filterPriority,
+         filterTitle };
