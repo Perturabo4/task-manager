@@ -12,7 +12,7 @@ const getVisibilityTasks = (tasks, filters) => {
     let filteredTasks = [...tasks];
 
     if(filters.taskTitle.trim()) {
-        filteredTasks = filteredTasks.filter( task => task.title === filters.taskTitle);
+        filteredTasks = filteredTasks.filter( task => task.title.toLowerCase().indexOf(filters.taskTitle.toLowerCase()) >= 0);
     }
     if(filters.done !== 'all') {
         filteredTasks = filteredTasks.filter( task => task.done === filters.done);
