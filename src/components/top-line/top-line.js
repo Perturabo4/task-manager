@@ -11,6 +11,22 @@ import Select from '../select';
 import './top-line.scss';
 
 const TopLine = ({filters, filterDone, filterPriority, addTask}) => {
+
+    let done;
+// Переделать **********************
+    if(filters.done === true) {
+        done = 'done'
+    }
+
+    if(filters.done === false) {
+        done = 'undone'
+    }
+
+    if(filters.done === 'all') {
+        done = 'all'
+    }
+// *******************************************
+
     return (
         <div className="container">
             <div className="top-line">
@@ -21,7 +37,7 @@ const TopLine = ({filters, filterDone, filterPriority, addTask}) => {
                         done: 'Выполненные',
                     }}
                     label='Состояние'
-                    value={filters.done}
+                    value={done}
                     onChange={(e) => filterDone(e.target.value)}
                 />
                 <Select 

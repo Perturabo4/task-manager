@@ -18,7 +18,7 @@ function getEmptyTask () {
         text: '',
         imgSrc: '',
         priority: 'all',
-        done: 'undone',
+        done: false,
         open: false
     }
 }
@@ -52,6 +52,26 @@ const saveTask = (tasks, newTask) => {
     return index >= 0
             ? [...tasks.slice(0, index), newTask, ...tasks.slice(index + 1)]
             : [newTask, ...tasks];
+}
+
+const setFilterDone = (filters, doneValue) => {
+    let done;
+
+    switch (doneValue) {
+        case 'all':
+            done = 'all';
+            break;
+        case 'undone':
+            done = false;
+            break;
+        case 'done':
+            done = true;
+            break;
+        default:
+            return filters;
+    }
+
+    return {...filters, done}
 }
 
 const reducer = (state = initialState, action) => {
@@ -137,7 +157,7 @@ const reducer = (state = initialState, action) => {
         case 'FILTER_DONE':
             return {
                 ...state,
-                filters: {...state.filters, done: action.payload}
+                filters: setFilterDone(state.filters, action.payload)
             }
         case 'FILTER_PRIORITY':
             return {
