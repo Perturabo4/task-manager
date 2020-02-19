@@ -1,7 +1,27 @@
-.input-field {
-    input[type="text"] {
-        &.err {
-            border-bottom: 1px solid red;
+$red: red;
+
+%error-input {
+    border-bottom: 1px solid $red;
+    box-shadow: 0 1px 0 0 $red;
+}
+
+
+.modal-content {
+    .input-field {
+        input[type="text"] {
+            &.err {
+               @extend %error-input;
+               &~label {
+                   color: $red;
+               }
+                &:focus{
+                  @extend  %error-input;
+
+                  &~label {
+                    color: $red;
+                }
+                }
+            }
         }
     }
 }

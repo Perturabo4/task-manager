@@ -54,17 +54,17 @@ const ModalForm = ({isEdit, newTask, addTask, tasksSave, setTitle, setText, setI
                     <Button 
                         text="Сохранить"
                         onClick={(e) => {
-                            if(title) {
+                            if(!title) {
                                 e.preventDefault();
                                 return;
                             }
                             tasksSave(newTask);
-                            addTask();
+                            addTask(false);
                         }}
                     />
                     <Button 
                         text="Отмена"
-                        onClick={() => addTask()}
+                        onClick={() => addTask(false)}
                     />
                 </div>
             </div>

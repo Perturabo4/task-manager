@@ -84,6 +84,13 @@ const titleValidator = (title, isValidObj) => {
     return {...isValidObj, title: isTitle}
 }
 
+const resetValidatorErrors = (isValidObj) => {
+  const newObj = {...isValidObj};
+  Object.keys(newObj).forEach( key => newObj[key] = true);
+
+  return newObj;
+}
+
 const reducer = (state = initialState, action) => {
 
     switch(action.type) {
@@ -104,7 +111,8 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 isEdit: action.payload,
-                newTask: getEmptyTask()
+                newTask: getEmptyTask(),
+                isValid: resetValidatorErrors(state.isValid)
             }
         case 'TASK_OPEN':
             return {
