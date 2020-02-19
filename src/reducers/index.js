@@ -8,6 +8,9 @@ const initialState = {
         done: 'all',
         priority: 'all',
         taskTitle: ''
+    },
+    isValid: {
+        title: true
     }
 };
 
@@ -74,6 +77,13 @@ const setFilterDone = (filters, doneValue) => {
     return {...filters, done}
 }
 
+const titleValidator = (title, isValidObj) => {
+    
+    const isTitle = title.trim().length > 0;
+    console.log(isTitle);
+    return {...isValidObj, title: isTitle}
+}
+
 const reducer = (state = initialState, action) => {
 
     switch(action.type) {
@@ -123,7 +133,8 @@ const reducer = (state = initialState, action) => {
                 newTask: {
                     ...state.newTask,
                     title: action.payload
-                }
+                },
+                isValid: titleValidator(action.payload, state.isValid)
             }
         case 'SET_TEXT':
             return {

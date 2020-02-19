@@ -1,0 +1,7 @@
+.input-field {
+    input[type="text"] {
+        &.err {
+            border-bottom: 1px solid red;
+        }
+    }
+}

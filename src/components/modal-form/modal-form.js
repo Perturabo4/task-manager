@@ -6,8 +6,10 @@ import Select from '../select';
 import {addTask, tasksSave, setTitle, setText, setImg, setPriority} from '../../actions';
 import './modal-form.scss';
 
-const ModalForm = ({isEdit, newTask, addTask, tasksSave, setTitle, setText, setImg, setPriority }) => {
+const ModalForm = ({isEdit, newTask, addTask, tasksSave, setTitle, setText, setImg, setPriority, isValid }) => {
     
+    let {title} = isValid;
+
     const styles = {display: isEdit ? 'block' : 'none'}
 
     return (
@@ -19,6 +21,8 @@ const ModalForm = ({isEdit, newTask, addTask, tasksSave, setTitle, setText, setI
                         label="Заголовок"
                         onChange={(e) => setTitle(e.target.value)}
                         value={newTask.title}
+                        err={title ? '' : 'Поле обязательное !'}
+
                     />
                     <Input 
                         id="task_text"
@@ -49,7 +53,11 @@ const ModalForm = ({isEdit, newTask, addTask, tasksSave, setTitle, setText, setI
                 <div className="modal-footer">
                     <Button 
                         text="Сохранить"
-                        onClick={() => {
+                        onClick={(e) => {
+                            if(title) {
+                                e.preventDefault();
+                                return;
+                            }
                             tasksSave(newTask);
                             addTask();
                         }}
@@ -64,8 +72,8 @@ const ModalForm = ({isEdit, newTask, addTask, tasksSave, setTitle, setText, setI
     )
 }
 
-const mapStateToProps = ({isEdit, newTask}) => {
-    return { isEdit, newTask };
+const mapStateToProps = ({isEdit, newTask, isValid}) => {
+    return { isEdit, newTask, isValid };
 }
 
 const mapDispatchToProps = {

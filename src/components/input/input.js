@@ -1,7 +1,10 @@
 import React from 'react';
+import './input.scss';
 
-const CheckType = ({id, type, cls=[], onChange, value}) => {
-    const classes = cls.join(' ');
+const CheckType = ({id, type, cls=[], onChange, value, err}) => {
+
+    const classes = [...cls, err ? 'err': ''].join(' ');
+
     switch (type) {
             
         case 'textarea':
@@ -10,7 +13,8 @@ const CheckType = ({id, type, cls=[], onChange, value}) => {
                     id={id} 
                     className={`materialize-textarea ${classes}`}
                     onChange={onChange}
-                    value={value}>
+                    value={value}
+                >
                 </textarea> 
             );
         default :
