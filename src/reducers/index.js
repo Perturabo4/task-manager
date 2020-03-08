@@ -33,7 +33,7 @@ const getTaskToEdit = (tasks, id) => {
     return taskToEdit[0];
 }
 
-const setEdit = (tasks, id) => {
+const setOpen = (tasks, id) => {
     return tasks.map(task => ({...task, open: task.id === id}));
 } 
 
@@ -117,7 +117,7 @@ const reducer = (state = initialState, action) => {
         case 'TASK_OPEN':
             return {
                 ...state,
-                tasks: setEdit(state.tasks, action.payload)
+                tasks: setOpen(state.tasks, action.payload)
             }
         case 'TASK_DELETE':
             return {
@@ -169,10 +169,21 @@ const reducer = (state = initialState, action) => {
                 }
             }
         case 'TASKS_SAVE':
+            if(state.newTask.title.length > 0 ) {
+                return {
+                    ...state,
+                    tasks: saveTask(state.tasks, action.payload),
+                    isEdit: false,
+                    newTask: getEmptyTask(),
+                    isValid: resetValidatorErrors(state.isValid)
+                }
+            }
+
             return {
                 ...state,
-                tasks: saveTask(state.tasks, action.payload)
+                isValid: {...state.isValid, title: false}
             }
+            
         case 'FILTER_DONE':
             return {
                 ...state,

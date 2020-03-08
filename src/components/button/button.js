@@ -6,7 +6,7 @@ const Button = ({cls=['red'], text='button', onClick}) => {
         <button 
             onClick={(e) => {
                 e.stopPropagation();
-                onClick();
+                onClick(e);
             }}
             className={`btn waves-effect waves-light ${classes}`} 
             name="action">
