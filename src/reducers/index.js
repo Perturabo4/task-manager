@@ -3,7 +3,7 @@ const initialState = {
     load: true,
     error: null,
     isEdit: false,
-    newTask: getEmptyTask (),
+    newTask: getEmptyTask (), 
     filters: {
         done: 'all',
         priority: 'all',
@@ -20,7 +20,7 @@ function getEmptyTask () {
         title: '',
         text: '',
         imgSrc: '',
-        priority: 'all',
+        priority: 'normal',
         done: false,
         open: false
     }
@@ -80,7 +80,7 @@ const setFilterDone = (filters, doneValue) => {
 const titleValidator = (title, isValidObj) => {
     
     const isTitle = title.trim().length > 0;
-    console.log(isTitle);
+    
     return {...isValidObj, title: isTitle}
 }
 
