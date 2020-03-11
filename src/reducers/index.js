@@ -171,7 +171,10 @@ const reducer = (state = initialState, action) => {
         case 'TASKS_SAVE':
             return {
                 ...state,
-                tasks: saveTask(state.tasks, action.payload)
+                tasks: saveTask(state.tasks, action.payload),
+                isEdit: false,
+                newTask: getEmptyTask(),
+                isValid: resetValidatorErrors(state.isValid)
             }
         case 'FILTER_DONE':
             return {
@@ -187,6 +190,11 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 filters: {...state.filters, taskTitle: action.payload}
+            }
+        case 'IS_VALID_TASK':
+            return {
+                ...state,
+                isValid: titleValidator(state.newTask.title, state.isValid)
             }
         default:
             return state;

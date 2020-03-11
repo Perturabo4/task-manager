@@ -113,6 +113,12 @@ const filterTitle = (value) => {
     }
 }
 
+const isValidTask = () => {
+    return {
+        type: 'IS_VALID_TASK'
+    }
+}
+
 export { fetchTasks,
          addTask,
          tasksSave,
@@ -126,4 +132,5 @@ export { fetchTasks,
          taskEdit,
          filterDone,
          filterPriority,
-         filterTitle };
+         filterTitle,
+         isValidTask };

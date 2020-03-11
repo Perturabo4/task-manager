@@ -3,10 +3,10 @@ import {connect} from 'react-redux';
 import Button from '../button';
 import Input from '../input';
 import Select from '../select';
-import {addTask, tasksSave, setTitle, setText, setImg, setPriority} from '../../actions';
+import {addTask, tasksSave, setTitle, setText, setImg, setPriority, isValidTask} from '../../actions';
 import './modal-form.scss';
 
-const ModalForm = ({isEdit, newTask, addTask, tasksSave, setTitle, setText, setImg, setPriority, isValid }) => {
+const ModalForm = ({isEdit, newTask, addTask, tasksSave, setTitle, setText, setImg, setPriority, isValid, isValidTask }) => {
     
     let {title} = isValid;
 
@@ -54,6 +54,7 @@ const ModalForm = ({isEdit, newTask, addTask, tasksSave, setTitle, setText, setI
                     <Button 
                         text="Сохранить"
                         onClick={(e) => {
+                            isValidTask();
                             if(!title) {
                                 e.preventDefault();
                                 return;
@@ -82,7 +83,8 @@ const mapDispatchToProps = {
     setTitle,
     setText,
     setImg,
-    setPriority
+    setPriority,
+    isValidTask
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ModalForm);
