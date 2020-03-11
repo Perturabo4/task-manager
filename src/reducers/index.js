@@ -3,7 +3,7 @@ const initialState = {
     load: true,
     error: null,
     isEdit: false,
-    newTask: getEmptyTask (),
+    newTask: getEmptyTask (), 
     filters: {
         done: 'all',
         priority: 'all',
@@ -20,7 +20,7 @@ function getEmptyTask () {
         title: '',
         text: '',
         imgSrc: '',
-        priority: 'all',
+        priority: 'normal',
         done: false,
         open: false
     }
@@ -33,7 +33,7 @@ const getTaskToEdit = (tasks, id) => {
     return taskToEdit[0];
 }
 
-const setEdit = (tasks, id) => {
+const setOpen = (tasks, id) => {
     return tasks.map(task => ({...task, open: task.id === id}));
 } 
 
@@ -80,7 +80,7 @@ const setFilterDone = (filters, doneValue) => {
 const titleValidator = (title, isValidObj) => {
     
     const isTitle = title.trim().length > 0;
-    console.log(isTitle);
+    
     return {...isValidObj, title: isTitle}
 }
 
@@ -117,7 +117,7 @@ const reducer = (state = initialState, action) => {
         case 'TASK_OPEN':
             return {
                 ...state,
-                tasks: setEdit(state.tasks, action.payload)
+                tasks: setOpen(state.tasks, action.payload)
             }
         case 'TASK_DELETE':
             return {
@@ -169,13 +169,21 @@ const reducer = (state = initialState, action) => {
                 }
             }
         case 'TASKS_SAVE':
+            if(state.newTask.title.length > 0 ) {
+                return {
+                    ...state,
+                    tasks: saveTask(state.tasks, action.payload),
+                    isEdit: false,
+                    newTask: getEmptyTask(),
+                    isValid: resetValidatorErrors(state.isValid)
+                }
+            }
+
             return {
                 ...state,
-                tasks: saveTask(state.tasks, action.payload),
-                isEdit: false,
-                newTask: getEmptyTask(),
-                isValid: resetValidatorErrors(state.isValid)
+                isValid: {...state.isValid, title: false}
             }
+            
         case 'FILTER_DONE':
             return {
                 ...state,

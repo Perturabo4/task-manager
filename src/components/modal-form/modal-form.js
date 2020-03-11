@@ -39,7 +39,6 @@ const ModalForm = ({isEdit, newTask, addTask, tasksSave, setTitle, setText, setI
                     />
                     <Select 
                         opt={{
-                            all: 'Все',
                             high: 'Высокий',
                             normal: 'Средний',
                             low: 'Низкий'
@@ -53,15 +52,7 @@ const ModalForm = ({isEdit, newTask, addTask, tasksSave, setTitle, setText, setI
                 <div className="modal-footer">
                     <Button 
                         text="Сохранить"
-                        onClick={(e) => {
-                            isValidTask();
-                            if(!title) {
-                                e.preventDefault();
-                                return;
-                            }
-                            tasksSave(newTask);
-                            addTask(false);
-                        }}
+                        onClick={(e) => tasksSave(newTask) }
                     />
                     <Button 
                         text="Отмена"
