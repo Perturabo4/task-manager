@@ -53,4 +53,17 @@ export default class TaskService {
         //     }, 700);
         // });
     }
+
+    createTask(task) {
+       return fetch('https://task-manager-55ca3.firebaseio.com/tasks.json', {
+            method: 'POST',
+            mode: 'cors',
+            headers: {
+                'Content-type': 'application/json'
+            },
+            body: JSON.stringify(task)
+        })
+        .then(res => res.json())
+        .then(res => console.log(res))
+    }
 }
