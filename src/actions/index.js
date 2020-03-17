@@ -22,6 +22,14 @@ const fetchTasks = (dispatch, service) => () => {
         });
 }
 
+const createTask = (dispatch, service) => (task) => {
+    return service.createTask(task)
+        .then( data => {
+            console.log(data)
+        })
+        .catch( err => console.log(err))
+}
+
 const addTask = (edit) => {
     return {
         type: 'ADD_TASK',
@@ -133,4 +141,6 @@ export { fetchTasks,
          filterDone,
          filterPriority,
          filterTitle,
-         isValidTask };
+         isValidTask,
+        
+         createTask};

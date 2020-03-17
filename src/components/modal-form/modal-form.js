@@ -1,12 +1,14 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import {compose} from '../../utils';
+import WithTaskService from '../hoc';
 import Button from '../button';
 import Input from '../input';
 import Select from '../select';
-import {addTask, tasksSave, setTitle, setText, setImg, setPriority, isValidTask} from '../../actions';
+import {addTask, tasksSave, setTitle, setText, setImg, setPriority, isValidTask, createTask} from '../../actions';
 import './modal-form.scss';
 
-const ModalForm = ({isEdit, newTask, addTask, tasksSave, setTitle, setText, setImg, setPriority, isValid, isValidTask }) => {
+const ModalForm = ({isEdit, newTask, addTask, tasksSave, setTitle, setText, setImg, setPriority, isValid, isValidTask, createTask }) => {
     
     let {title} = isValid;
 
@@ -51,8 +53,9 @@ const ModalForm = ({isEdit, newTask, addTask, tasksSave, setTitle, setText, setI
                 </div>
                 <div className="modal-footer">
                     <Button 
-                        text="Сохранить"
-                        onClick={(e) => tasksSave(newTask) }
+                        text="Сохранить" 
+                        // onClick={(e) => tasksSave(newTask) }
+                        onClick={(e) => createTask(newTask) }
                     />
                     <Button 
                         text="Отмена"
@@ -68,14 +71,19 @@ const mapStateToProps = ({isEdit, newTask, isValid}) => {
     return { isEdit, newTask, isValid };
 }
 
-const mapDispatchToProps = {
-    addTask,
-    tasksSave,
-    setTitle,
-    setText,
-    setImg,
-    setPriority,
-    isValidTask
+const mapDispatchToProps = (dispatch, {TaskService}) => {
+
+    return {
+        addTask: (isEdit) => dispatch(addTask(isEdit)),
+        tasksSave: (newTask) => dispatch(tasksSave(newTask)),
+        setTitle: (title) => dispatch(setTitle(title)),
+        setText: (text) => dispatch(setText(text)),
+        setImg: (imgSrc) => dispatch(setImg(imgSrc)),
+        setPriority: (priority) => dispatch(setPriority(priority)),
+        isValidTask: () => dispatch(isValidTask()),
+        createTask: createTask(dispatch, TaskService)
+    }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ModalForm);
+export default compose(WithTaskService(),
+    connect(mapStateToProps, mapDispatchToProps))(ModalForm);

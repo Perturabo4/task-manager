@@ -42,8 +42,10 @@ export default class TaskService {
     getTasks() {
 
         return fetch('https://task-manager-55ca3.firebaseio.com/tasks.json')
-                .then( res => res.json())
-                .then( dd => [dd])
+                .then( response => response.json())
+                .then( data => [data])
+                .then( taskData => Object.values(taskData[0]))
+                .catch( err => new Error('Something went wrong'))
 
         // return new Promise((resolve, reject) => {
         //     // this.data = [];
@@ -57,13 +59,11 @@ export default class TaskService {
     createTask(task) {
        return fetch('https://task-manager-55ca3.firebaseio.com/tasks.json', {
             method: 'POST',
-            mode: 'cors',
             headers: {
                 'Content-type': 'application/json'
             },
             body: JSON.stringify(task)
         })
-        .then(res => res.json())
-        .then(res => console.log(res))
+    
     }
 }
