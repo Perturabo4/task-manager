@@ -5,10 +5,10 @@ import WithTaskService from '../hoc';
 import Button from '../button';
 import Input from '../input';
 import Select from '../select';
-import {addTask, tasksSave, setTitle, setText, setImg, setPriority, isValidTask, createTask} from '../../actions';
+import {addTask, tasksSave, setTitle, setText, setImg, setPriority, isValidTask, createTask, updateTask} from '../../actions';
 import './modal-form.scss';
 
-const ModalForm = ({isEdit, newTask, addTask, tasksSave, setTitle, setText, setImg, setPriority, isValid, isValidTask, createTask }) => {
+const ModalForm = ({isEdit, newTask, addTask, tasksSave, setTitle, setText, setImg, setPriority, isValid, isValidTask, createTask, updateTask }) => {
     
     let {title} = isValid;
 
@@ -54,8 +54,7 @@ const ModalForm = ({isEdit, newTask, addTask, tasksSave, setTitle, setText, setI
                 <div className="modal-footer">
                     <Button 
                         text="Сохранить" 
-                        // onClick={(e) => tasksSave(newTask) }
-                        onClick={(e) => createTask(newTask) }
+                        onClick={(e) => newTask.id ? updateTask(newTask.id, newTask) : createTask(newTask) }
                     />
                     <Button 
                         text="Отмена"
@@ -81,7 +80,8 @@ const mapDispatchToProps = (dispatch, {TaskService}) => {
         setImg: (imgSrc) => dispatch(setImg(imgSrc)),
         setPriority: (priority) => dispatch(setPriority(priority)),
         isValidTask: () => dispatch(isValidTask()),
-        createTask: createTask(dispatch, TaskService)
+        createTask: createTask(dispatch, TaskService),
+        updateTask: updateTask(dispatch, TaskService)
     }
 }
 

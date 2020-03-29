@@ -12,24 +12,6 @@ const tasksError = (error) => {
     };
 };
 
-const fetchTasks = (dispatch, service) => () => {
-    return service.getTasks()
-        .then((data) => {
-            dispatch(tasksLoaded(data));
-        })
-        .catch((err) => {
-            dispatch(tasksError(err));
-        });
-}
-
-const createTask = (dispatch, service) => (task) => {
-    return service.createTask(task)
-        .then( data => {
-            console.log(data)
-        })
-        .catch( err => console.log(err))
-}
-
 const addTask = (edit) => {
     return {
         type: 'ADD_TASK',
@@ -127,6 +109,66 @@ const isValidTask = () => {
     }
 }
 
+const tasksLoading = (isLoading) => {
+    return {
+        type: 'TASKS_LOADING',
+        payload: isLoading
+    }
+}
+
+const fetchTasks = (dispatch, service) => () => {
+    return service.getTasks()
+        .then((data) => {
+            dispatch(tasksLoaded(data));
+        })
+        .catch((err) => {
+            dispatch(tasksError(err));
+        });
+}
+
+const createTask = (dispatch, service) => (task) => {
+
+    dispatch(tasksLoading(true));
+
+    return service.createTask(task)
+        .then( res => {
+            dispatch(tasksSave(task));
+            dispatch(tasksLoading(false));
+        })
+        .catch( (err) => {
+            dispatch(tasksError(err));
+        })
+}
+
+const updateTask = (dispatch, service) => (id, task) => {
+
+    dispatch(tasksLoading(true));
+
+    return service.updateTask(id, task)
+        .then( res => {
+            dispatch(tasksSave(task));
+            dispatch(tasksLoading(false));
+        })
+        .catch( (err) => {
+            dispatch(tasksError(err));
+        })
+}
+
+const deleteTask = (dispatch, service) => (id) => {
+
+    dispatch(tasksLoading(true));
+
+    return service.deleteTask(id)
+        .then( res => {
+            dispatch(taskDelete(id));
+            dispatch(tasksLoading(false));
+        })
+        .catch( (err) => {
+            dispatch(tasksError(err));
+        })
+}
+
+
 export { fetchTasks,
          addTask,
          tasksSave,
@@ -135,12 +177,13 @@ export { fetchTasks,
          setImg,
          setPriority,
          taskOpen,
-         taskDelete,
          taskDone,
          taskEdit,
          filterDone,
          filterPriority,
          filterTitle,
          isValidTask,
-        
-         createTask};
+         createTask,
+         deleteTask,
+         updateTask
+        };

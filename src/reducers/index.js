@@ -30,7 +30,7 @@ const getTaskToEdit = (tasks, id) => {
 
     const taskToEdit = tasks.filter(task => task.id === id);
 
-    return taskToEdit[0];
+    return {...taskToEdit[0], open: false};
 }
 
 const setOpen = (tasks, id) => {
@@ -46,7 +46,8 @@ const setDone = (tasks, id) => {
 } 
 
 const deleteTask = (tasks, id) => {
-    return tasks.filter( task => task.id !== id);
+
+    return tasks.filter( task => task.id !== id );
 }
 
 const saveTask = (tasks, newTask) => {
@@ -101,6 +102,12 @@ const reducer = (state = initialState, action) => {
                 tasks: action.payload,
                 load: false
             };
+        case 'TASKS_LOADING':
+            return {
+                ...state,
+                load: action.payload,
+                isEdit: false
+            }
         case 'TASKS_ERROR':
             return {
                 ...state,
