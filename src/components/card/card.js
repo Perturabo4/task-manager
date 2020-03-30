@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-
+import Spinner from '../spinner';
 import {taskDone} from '../../actions';
 import CheckBox from '../check-box';
 import Dropdown from '../dropdown';
@@ -22,11 +22,13 @@ const Priority = ({priority}) => {
     );
 }
 
-const Card = ( {task, taskDone } ) => {
+const Card = ( {task, taskDone, inProgres } ) => {
     const {done, imgSrc, title, text, id, open, priority} = task;
     return (
         <div className={`card ${done ? 'done': ''}`}>
-            <div className="card-shadow"></div>
+            <div className="card-shadow">
+                {inProgres && <Spinner />}
+            </div>
             {done && <CheckBox onChange={() => taskDone(id)}/>}
             <div className="card-image">
                 <img src={ imgSrc } alt="IMG"/>

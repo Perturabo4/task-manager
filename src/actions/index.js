@@ -116,6 +116,13 @@ const tasksLoading = (isLoading) => {
     }
 }
 
+const taskInProgres = (id) => {
+    return {
+        type: 'TASK_IN_PROGRES',
+        payload: id
+    }
+}
+
 const fetchTasks = (dispatch, service) => () => {
     return service.getTasks()
         .then((data) => {
@@ -132,6 +139,7 @@ const createTask = (dispatch, service) => (task) => {
 
     return service.createTask(task)
         .then( res => {
+            console.log(task.id)
             dispatch(tasksSave(task));
             dispatch(tasksLoading(false));
         })
@@ -142,12 +150,12 @@ const createTask = (dispatch, service) => (task) => {
 
 const updateTask = (dispatch, service) => (id, task) => {
 
-    dispatch(tasksLoading(true));
+    dispatch(taskInProgres(id));
 
     return service.updateTask(id, task)
         .then( res => {
             dispatch(tasksSave(task));
-            dispatch(tasksLoading(false));
+            dispatch(taskInProgres(id));
         })
         .catch( (err) => {
             dispatch(tasksError(err));
@@ -157,7 +165,7 @@ const updateTask = (dispatch, service) => (id, task) => {
 const deleteTask = (dispatch, service) => (id) => {
 
     dispatch(tasksLoading(true));
-
+    console.log('delete', id);
     return service.deleteTask(id)
         .then( res => {
             dispatch(taskDelete(id));
@@ -183,6 +191,7 @@ export { fetchTasks,
          filterPriority,
          filterTitle,
          isValidTask,
+         taskInProgres,
          createTask,
          deleteTask,
          updateTask

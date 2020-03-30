@@ -16,13 +16,14 @@ const initialState = {
 
 function getEmptyTask () {
     return {
-        id: new Date().getTime(),
+        id: '',
         title: '',
         text: '',
         imgSrc: '',
         priority: 'normal',
         done: false,
-        open: false
+        open: false,
+        inProgres: false
     }
 }
 const getTaskToEdit = (tasks, id) => {
@@ -37,13 +38,19 @@ const setOpen = (tasks, id) => {
     return tasks.map(task => ({...task, open: task.id === id}));
 } 
 
+const setTaskInProgres = (tasks, id) => {
+    return tasks.map(task => {
+        const inProgres = task.id === id ? !task.inProgres : task.inProgres;
+        return { ...task, inProgres }
+    });
+} 
+
 const setDone = (tasks, id) => {
-    
     return tasks.map(task => {
         const done = task.id === id ? !task.done : task.done;
         return { ...task, done }
     });
-} 
+}
 
 const deleteTask = (tasks, id) => {
 
@@ -141,6 +148,12 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 tasks: setDone(state.tasks, action.payload)
+            }
+        case 'TASK_IN_PROGRES':
+            return {
+                ...state,
+                isEdit: false,
+                tasks: setTaskInProgres(state.tasks, action.payload)
             }
         case 'SET_TITLE':
             return {

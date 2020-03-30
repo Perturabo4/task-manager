@@ -40,7 +40,7 @@ const TaskList = ({error, load, tasks, isTask}) => {
                load
                 ? <Spinner />
                 : isTask 
-                    ? tasks.map( task => <Card task={task} key={task.id} />)
+                    ? tasks.map( task => <Card task={task} key={task.id} inProgres={task.inProgres}/>)
                     : <div className="no-tasks">Список задач пуст</div>
            }
         </>
