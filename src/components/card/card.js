@@ -22,8 +22,9 @@ const Priority = ({priority}) => {
     );
 }
 
-const Card = ( {task, taskDone, inProgres } ) => {
-    const {done, imgSrc, title, text, id, open, priority} = task;
+const Card = ( {task, taskDone} ) => {
+    const {done, imgSrc, title, text, id, open, priority, inProgres} = task;
+    
     return (
         <div className={`card ${done ? 'done': ''}`}>
             <div className="card-shadow">

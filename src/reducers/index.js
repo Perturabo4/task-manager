@@ -16,7 +16,6 @@ const initialState = {
 
 function getEmptyTask () {
     return {
-        id: '',
         title: '',
         text: '',
         imgSrc: '',
@@ -58,6 +57,7 @@ const deleteTask = (tasks, id) => {
 }
 
 const saveTask = (tasks, newTask) => {
+    newTask.inProgres = false;
     const index = tasks.findIndex(({id}) => id === newTask.id);
 
     return index >= 0

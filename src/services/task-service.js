@@ -1,7 +1,6 @@
 export default class TaskService {
 
     getTasks() {
-
         return fetch('https://task-manager-55ca3.firebaseio.com/tasks.json')
                 .then( response => response.json())
                 .then( data => {

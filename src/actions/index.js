@@ -138,9 +138,10 @@ const createTask = (dispatch, service) => (task) => {
     dispatch(tasksLoading(true));
 
     return service.createTask(task)
-        .then( res => {
-            console.log(task.id)
-            dispatch(tasksSave(task));
+        .then( res => res.json())
+        .then(data => {
+            console.log(data)
+            dispatch(tasksSave({...task, id: data.name}));
             dispatch(tasksLoading(false));
         })
         .catch( (err) => {
@@ -155,7 +156,6 @@ const updateTask = (dispatch, service) => (id, task) => {
     return service.updateTask(id, task)
         .then( res => {
             dispatch(tasksSave(task));
-            dispatch(taskInProgres(id));
         })
         .catch( (err) => {
             dispatch(tasksError(err));
