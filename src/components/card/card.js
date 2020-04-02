@@ -24,9 +24,18 @@ const Priority = ({priority}) => {
 
 const Card = ( {task, taskDone} ) => {
     const {done, imgSrc, title, text, id, open, priority, inProgres} = task;
-    
+    const classes = [];
+
+    if(done) {
+        classes.push('done');
+    }
+
+    if(inProgres) {
+        classes.push('inProgres');
+    }
+
     return (
-        <div className={`card ${done ? 'done': ''}`}>
+        <div className={`card ${classes.join(' ')}`}>
             <div className="card-shadow">
                 {inProgres && <Spinner />}
             </div>
