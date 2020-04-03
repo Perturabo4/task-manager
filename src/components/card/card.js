@@ -1,7 +1,9 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import {compose} from '../../utils';
+import WithTaskService from '../hoc';
 import Spinner from '../spinner';
-import {taskDone} from '../../actions';
+import {updateTask} from '../../actions';
 import CheckBox from '../check-box';
 import Dropdown from '../dropdown';
 import './card.scss';
@@ -22,7 +24,7 @@ const Priority = ({priority}) => {
     );
 }
 
-const Card = ( {task, taskDone} ) => {
+const Card = ( {task, updateTask} ) => {
     const {done, imgSrc, title, text, id, open, priority, inProgres} = task;
     const classes = [];
 
@@ -39,7 +41,7 @@ const Card = ( {task, taskDone} ) => {
             <div className="card-shadow">
                 {inProgres && <Spinner />}
             </div>
-            {done && <CheckBox onChange={() => taskDone(id)}/>}
+            {done && <CheckBox onChange={() => updateTask(id, null, ['done', false])}/>}
             <div className="card-image">
                 <img src={ imgSrc } alt="IMG"/>
                 <span className="card-title">{ title }</span>
@@ -55,12 +57,13 @@ const Card = ( {task, taskDone} ) => {
     )
 }
 
-const mapStateToProps = () => {
-    return {} 
+const mapDispatchToProps = (dispatch, {TaskService}) => {
+    return {
+        updateTask: updateTask(dispatch, TaskService)
+    }
 }
-
-const mapDispatchToProps = {
-    taskDone
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Card);
+    
+export default compose(
+        WithTaskService(),
+        connect(null, mapDispatchToProps)
+    )(Card);

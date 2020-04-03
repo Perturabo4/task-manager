@@ -25,17 +25,15 @@ export default class TaskService {
 
             const [key, val] = singleKey;
 
-            console.log(key, val);
-
             return fetch(`https://task-manager-55ca3.firebaseio.com/tasks/${id}/${key}.json`, {
                 method: 'PUT',
-               body: val
+                body: val
             })
         }
 
         return fetch(`https://task-manager-55ca3.firebaseio.com/tasks/${id}.json`, {
-             method: 'PUT',
-             headers: {
+            method: 'PUT',
+            headers: {
                 'Content-type': 'application/json'
             },
             body: JSON.stringify(task)
