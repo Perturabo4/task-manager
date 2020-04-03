@@ -49,7 +49,7 @@ const Card = ( {task, taskDone} ) => {
             </div>
             <div className="card-action">
                 <Priority priority={priority}/>
-                {!done && <Dropdown open={open} id={id} />}
+                {!done && <Dropdown open={open} id={id} done={done}/>}
             </div>
         </div>
     )

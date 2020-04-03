@@ -19,7 +19,20 @@ export default class TaskService {
         })
     }
 
-    updateTask(id, task) {
+    updateTask(id, task, singleKey) {
+
+        if(singleKey) {
+
+            const [key, val] = singleKey;
+
+            console.log(key, val);
+
+            return fetch(`https://task-manager-55ca3.firebaseio.com/tasks/${id}/${key}.json`, {
+                method: 'PUT',
+               body: val
+            })
+        }
+
         return fetch(`https://task-manager-55ca3.firebaseio.com/tasks/${id}.json`, {
              method: 'PUT',
              headers: {

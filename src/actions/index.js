@@ -140,7 +140,6 @@ const createTask = (dispatch, service) => (task) => {
     return service.createTask(task)
         .then( res => res.json())
         .then(data => {
-            console.log(data)
             dispatch(tasksSave({...task, id: data.name}));
             dispatch(tasksLoading(false));
         })
@@ -149,13 +148,14 @@ const createTask = (dispatch, service) => (task) => {
         })
 }
 
-const updateTask = (dispatch, service) => (id, task) => {
-
+const updateTask = (dispatch, service) => (id, task, singleKey) => {
+    
     dispatch(taskInProgres(id));
 
-    return service.updateTask(id, task)
+    return service.updateTask(id, task, singleKey)
         .then( res => {
-            dispatch(tasksSave(task));
+            singleKey ? dispatch(taskDone(id)) : dispatch(tasksSave(task));
+            dispatch(taskInProgres(id));
         })
         .catch( (err) => {
             dispatch(tasksError(err));
@@ -165,7 +165,6 @@ const updateTask = (dispatch, service) => (id, task) => {
 const deleteTask = (dispatch, service) => (id) => {
 
     dispatch(tasksLoading(true));
-    console.log('delete', id);
     return service.deleteTask(id)
         .then( res => {
             dispatch(taskDelete(id));

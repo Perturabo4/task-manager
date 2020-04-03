@@ -2,12 +2,12 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {compose} from '../../utils/';
 import WithTaskService from '../hoc/';
-import {taskOpen, deleteTask, taskDone, taskEdit} from '../../actions';
+import {taskOpen, deleteTask, updateTask, taskDone, taskEdit} from '../../actions';
 import Button from '../button';
 
 import './dropdown.scss';
 
-const Dropdown = ({open, id, taskOpen, deleteTask, taskDone, taskEdit}) => {
+const Dropdown = ({open, id, done, taskOpen, deleteTask, updateTask, taskDone, taskEdit}) => {
     return (
         <div className={`dropdown-wrapper ${open ? 'active' : ''}`}>
             <Button
@@ -16,7 +16,7 @@ const Dropdown = ({open, id, taskOpen, deleteTask, taskDone, taskEdit}) => {
             />
 
             <ul id="dropdown1" className="dropdown-content" >
-                <li onClick={() => taskDone(id)}>
+                <li onClick={() => updateTask(id, null, ['done', !done])}>
                     <span>Выполнено</span>
                 </li>
                 <li className="divider" tabIndex="-1"></li>
@@ -36,6 +36,7 @@ const mapDispatchToProps = (dispatch, {TaskService}) => {
     return {
         taskOpen: (id) => dispatch(taskOpen(id)),
         deleteTask: deleteTask(dispatch, TaskService),
+        updateTask: updateTask(dispatch, TaskService),
         taskDone: (id) => dispatch(taskDone(id)),
         taskEdit: (id) => dispatch(taskEdit(id))
     }
