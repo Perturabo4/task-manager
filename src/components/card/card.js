@@ -9,12 +9,12 @@ import Dropdown from '../dropdown';
 import './card.scss';
 
 const Priority = ({priority}) => {
-    const text = {low: 'Низкая', normal: 'Средняя', high: 'Высокая'};
+    const text = {low: 'Низкий', normal: 'Средний', high: 'Высокий'};
     const color = {low: 'green', normal: 'orange', high: 'red'};
 
     return (
         <span style={{fontSize: '0.8rem'}}>
-            Важность:<br/>
+            Приоритет:<br/>
             <span 
                 style={{color: color[priority], fontSize: '1.2rem'}}
             >

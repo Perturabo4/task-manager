@@ -37,17 +37,14 @@ const setOpen = (tasks, id) => {
     return tasks.map(task => ({...task, open: task.id === id}));
 } 
 
-const setTaskInProgres = (tasks, id) => {
-    return tasks.map(task => {
-        const inProgres = task.id === id ? !task.inProgres : task.inProgres;
-        return { ...task, inProgres }
-    });
-} 
+const setTaskInProgres = (tasks, id) => tasks.map( task => { 
+    return {...task, inProgres: task.id === id ? !task.inProgres : task.inProgres}
+});
 
 const setDone = (tasks, id) => {
     return tasks.map(task => {
         const done = task.id === id ? !task.done : task.done;
-        return { ...task, done }
+        return { ...task, done, inProgres: false }
     });
 }
 
@@ -193,7 +190,7 @@ const reducer = (state = initialState, action) => {
                     ...state,
                     tasks: saveTask(state.tasks, action.payload),
                     isEdit: false,
-                    newTask: getEmptyTask(),
+                    // newTask: getEmptyTask(),
                     isValid: resetValidatorErrors(state.isValid)
                 }
             }

@@ -151,11 +151,11 @@ const createTask = (dispatch, service) => (task) => {
 const updateTask = (dispatch, service) => (id, task, singleKey) => {
     
     dispatch(taskInProgres(id));
-
+    
+    console.log(task);
     return service.updateTask(id, task, singleKey)
         .then( res => {
             singleKey ? dispatch(taskDone(id)) : dispatch(tasksSave(task));
-            dispatch(taskInProgres(id));
         })
         .catch( (err) => {
             dispatch(tasksError(err));
