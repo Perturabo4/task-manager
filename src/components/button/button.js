@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Button = ({cls=['red'], text='button', onClick}) => {
+const Button = ({cls=['red'], text='button', onClick= () => false}) => {
     const classes = cls.join(' ');
     return (
         <button 

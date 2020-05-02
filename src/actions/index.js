@@ -123,6 +123,20 @@ const taskInProgres = (id) => {
     }
 }
 
+const setAuthEmail = (text) => {
+    return {
+        type: 'SET_AUTH_EMAIL',
+        payload: text
+    }
+}
+
+const setAuthPass = (pass) => {
+    return {
+        type: 'SET_AUTH_PASS',
+        payload: pass
+    }
+}
+
 const fetchTasks = (dispatch, service) => () => {
     return service.getTasks()
         .then((data) => {
@@ -192,5 +206,7 @@ export { fetchTasks,
          taskInProgres,
          createTask,
          deleteTask,
-         updateTask
+         updateTask,
+         setAuthEmail,
+         setAuthPass
         };

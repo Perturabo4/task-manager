@@ -1,0 +1,15 @@
+.auth-form {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 1.2rem;
+    max-width: 30%;
+    min-width: 300px;
+    border: 1px solid #4c4c4c;
+    text-align: center;
+
+    button {
+        margin-right: 10px;
+    }
+}

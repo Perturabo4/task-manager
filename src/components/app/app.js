@@ -1,55 +1,20 @@
 import React from 'react';
-import {connect} from 'react-redux';
+import {Route, Router} from 'react-router-dom';
+import AppContent from '../app-content';
 
-import {taskOpen} from '../../actions';
-import TaskListContainer from '../task-list';
-import SearchBar from '../searchBar';
-import TopLine from '../top-line';
-import ModalForm from '../modal-form';
-
+import Auth from '../auth';
 import 'materialize-css/dist/css/materialize.min.css';
 import 'materialize-css/dist/js/materialize.min.js';
 import './app.scss';
 
-const App = ({taskOpen}) => {
+const App = () => {
     return (
-        <div className="wrapper" onClick={() => taskOpen()}>
-            <header className="header">
-                <nav>
-                    <div className="nav-wrapper">
-                        <SearchBar /> 
-                    </div>
-                </nav>
-            </header>
-            <main>
-                <TopLine />
-                <div className="container">
-                    <div className="row">
-                        <div className="col s12">
-                            <div className="card-wrapper">
-                                <TaskListContainer />
-                                <ModalForm />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </main>
-            <footer className="page-footer">
-                &copy; 2020 Created by Viktor Soshko
-            </footer>
-        </div>
+        <>
+            <Route path="/" exact component={Auth} />
+            <Route path="/app" component={AppContent} />
+        </>
     )
-}
-
-const mapStateToProps = () => {
-    return {}
-}
-
-const mapDispatchToProps = (dispatch) => {
     
-    return {
-        taskOpen: (id) => dispatch(taskOpen(id))
-    }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default App;

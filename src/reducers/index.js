@@ -1,4 +1,8 @@
 const initialState = {
+    auth: {
+        email: '',
+        pass: ''
+    },
     tasks: [],
     load: true,
     error: null,
@@ -219,6 +223,22 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 isValid: titleValidator(state.newTask.title, state.isValid)
+            }
+        case 'SET_AUTH_EMAIL':
+            return {
+                ...state,
+                auth: {
+                    ...state.auth,
+                    email: action.payload
+                }
+            }
+        case 'SET_AUTH_PASS':
+            return {
+                ...state,
+                auth: {
+                    ...state.auth,
+                    pass: action.payload
+                }
             }
         default:
             return state;
