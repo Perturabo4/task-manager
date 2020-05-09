@@ -1,11 +1,13 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {setAuthEmail, setAuthPass} from '../../actions';
+import WithAuthService from '../hoc/with-auth-service';
+import {compose} from '../../utils';
+import {setAuthEmail, setAuthPass, registerNewUser} from '../../actions';
 import Button from '../button';
 
 import './auth.scss';
 
-const Auth = ({email, pass, setAuthEmail, setAuthPass}) => {
+const Auth = ({email, pass, setAuthEmail, setAuthPass, sighnUp}) => {
     const buttonActive = !email || !pass ? 'disabled' : '';
     return (
         <form 
@@ -35,11 +37,12 @@ const Auth = ({email, pass, setAuthEmail, setAuthPass}) => {
             </div>
             <Button
                 cls={['red', buttonActive]}
-                text={"Войти"}    
+                text={"Войти"}
             />
             <Button 
                 cls={['red', buttonActive]}
                 text={"Зарегистрироваться"} 
+                onClick={() => sighnUp(email, pass)}  
             />
         </form>
     )
@@ -47,9 +50,15 @@ const Auth = ({email, pass, setAuthEmail, setAuthPass}) => {
 
 const mapStateToProps = ({auth}) => auth;
 
-const mapDispatchToProps = {
-        setAuthEmail,
-        setAuthPass
+const mapDispatchToProps = (dispatch, {AuthService}) => {
+      return {
+        setAuthEmail: (email) => dispatch(setAuthEmail(email)),
+        setAuthPass: (pass) => dispatch(setAuthPass(pass)),
+        sighnUp: registerNewUser(dispatch, AuthService)
+      }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Auth); 
+export default compose(
+    WithAuthService(),
+    connect(mapStateToProps, mapDispatchToProps)
+)(Auth); 

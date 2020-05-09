@@ -137,6 +137,10 @@ const setAuthPass = (pass) => {
     }
 }
 
+const registerNewUser = (dispatch, service) => (email, pass, token) => {
+    return service.sighnUp(email, pass, token);
+}
+
 const fetchTasks = (dispatch, service) => () => {
     return service.getTasks()
         .then((data) => {
@@ -208,5 +212,6 @@ export { fetchTasks,
          deleteTask,
          updateTask,
          setAuthEmail,
-         setAuthPass
+         setAuthPass,
+         registerNewUser
         };
