@@ -137,12 +137,26 @@ const setAuthPass = (pass) => {
     }
 }
 
-const registerNewUser = (dispatch, service) => (email, pass, token) => {
-    return service.sighnUp(email, pass, token);
+const userAuthenticated = (userId) => {
+    return {
+        type: 'USER_AUTHENTICATED',
+        payload: userId
+    }
 }
 
-const fetchTasks = (dispatch, service) => () => {
-    return service.getTasks()
+const authUser = (dispatch, service) => async (email, pass, token) => {
+    const userData = await service.auth(email, pass, token);
+
+    console.log(userData);
+
+    const {localId} = userData;
+
+    dispatch(userAuthenticated(localId));
+
+}
+
+const fetchTasks = (dispatch, service) => (userId) => {
+    return service.getTasks(userId)
         .then((data) => {
             dispatch(tasksLoaded(data));
         })
@@ -151,11 +165,11 @@ const fetchTasks = (dispatch, service) => () => {
         });
 }
 
-const createTask = (dispatch, service) => (task) => {
+const createTask = (dispatch, service) => (task, userId) => {
 
     dispatch(tasksLoading(true));
 
-    return service.createTask(task)
+    return service.createTask(task, userId)
         .then( res => res.json())
         .then(data => {
             dispatch(tasksSave({...task, id: data.name}));
@@ -166,11 +180,11 @@ const createTask = (dispatch, service) => (task) => {
         })
 }
 
-const updateTask = (dispatch, service) => (id, task, singleKey) => {
+const updateTask = (dispatch, service) => (id, task, singleKey, userId) => {
     
     dispatch(taskInProgres(id));
     
-    return service.updateTask(id, task, singleKey)
+    return service.updateTask(id, task, singleKey, userId)
         .then( res => {
             singleKey ? dispatch(taskDone(id)) : dispatch(tasksSave(task));
         })
@@ -179,10 +193,10 @@ const updateTask = (dispatch, service) => (id, task, singleKey) => {
         })
 }
 
-const deleteTask = (dispatch, service) => (id) => {
+const deleteTask = (dispatch, service) => (id, userId) => {
 
     dispatch(tasksLoading(true));
-    return service.deleteTask(id)
+    return service.deleteTask(id, userId)
         .then( res => {
             dispatch(taskDelete(id));
             dispatch(tasksLoading(false));
@@ -213,5 +227,5 @@ export { fetchTasks,
          updateTask,
          setAuthEmail,
          setAuthPass,
-         registerNewUser
+         authUser
         };

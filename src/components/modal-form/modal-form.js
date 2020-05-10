@@ -8,9 +8,10 @@ import Select from '../select';
 import {addTask, tasksSave, setTitle, setText, setImg, setPriority, isValidTask, createTask, updateTask} from '../../actions';
 import './modal-form.scss';
 
-const ModalForm = ({isEdit, newTask, addTask, tasksSave, setTitle, setText, setImg, setPriority, isValid, isValidTask, createTask, updateTask }) => {
+const ModalForm = ({auth, isEdit, newTask, addTask, tasksSave, setTitle, setText, setImg, setPriority, isValid, isValidTask, createTask, updateTask }) => {
     
     let {title} = isValid;
+    const {userId} = auth;
 
     const styles = {display: isEdit ? 'block' : 'none'}
 
@@ -54,7 +55,7 @@ const ModalForm = ({isEdit, newTask, addTask, tasksSave, setTitle, setText, setI
                 <div className="modal-footer">
                     <Button 
                         text="Сохранить" 
-                        onClick={(e) => newTask.id ? updateTask(newTask.id, newTask) : createTask(newTask) }
+                        onClick={(e) => newTask.id ? updateTask(newTask.id, newTask, false, userId) : createTask(newTask, userId) }
                     />
                     <Button 
                         text="Отмена"
@@ -66,8 +67,8 @@ const ModalForm = ({isEdit, newTask, addTask, tasksSave, setTitle, setText, setI
     )
 }
 
-const mapStateToProps = ({isEdit, newTask, isValid}) => {
-    return { isEdit, newTask, isValid };
+const mapStateToProps = ({auth, isEdit, newTask, isValid}) => {
+    return { isEdit, newTask, isValid, auth };
 }
 
 const mapDispatchToProps = (dispatch, {TaskService}) => {

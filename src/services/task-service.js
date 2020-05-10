@@ -1,7 +1,11 @@
 export default class TaskService {
 
-    getTasks() {
-        return fetch('https://task-manager-55ca3.firebaseio.com/tasks.json')
+    constructor() {
+        this.apiUrl = 'https://task-manager-55ca3.firebaseio.com/'
+    }
+
+    getTasks(userId) {
+        return fetch(`${this.apiUrl} ${userId}/tasks.json`)
                 .then( response => response.json())
                 .then( data => {
                     return  Object.keys(data).map( key => ({...data[key], id: key}));
@@ -9,8 +13,8 @@ export default class TaskService {
                 .catch( err => new Error('Something went wrong'))
     }
 
-    createTask(task) {
-       return fetch('https://task-manager-55ca3.firebaseio.com/tasks.json', {
+    createTask(task, userId) {
+       return fetch(`${this.apiUrl} ${userId}/tasks.json`, {
             method: 'POST',
             headers: {
                 'Content-type': 'application/json'
@@ -19,19 +23,19 @@ export default class TaskService {
         })
     }
 
-    updateTask(id, task, singleKey) {
+    updateTask(id, task, singleKey, userId) {
 
         if(singleKey) {
 
             const [key, val] = singleKey;
 
-            return fetch(`https://task-manager-55ca3.firebaseio.com/tasks/${id}/${key}.json`, {
+            return fetch(`${this.apiUrl} ${userId}/tasks/${id}/${key}.json`, {
                 method: 'PUT',
                 body: val
             })
         }
 
-        return fetch(`https://task-manager-55ca3.firebaseio.com/tasks/${id}.json`, {
+        return fetch(`${this.apiUrl} ${userId}/tasks/${id}.json`, {
             method: 'PUT',
             headers: {
                 'Content-type': 'application/json'
@@ -41,8 +45,8 @@ export default class TaskService {
      
      }
 
-    deleteTask(id) {
-        return fetch(`https://task-manager-55ca3.firebaseio.com/tasks/${id}.json`, {
+    deleteTask(id, userId) {
+        return fetch(`${this.apiUrl} ${userId}/tasks/${id}.json`, {
              method: 'DELETE',
          })
      

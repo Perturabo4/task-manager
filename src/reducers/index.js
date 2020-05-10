@@ -1,7 +1,8 @@
 const initialState = {
     auth: {
         email: '',
-        pass: ''
+        pass: '',
+        userId: ''
     },
     tasks: [],
     load: true,
@@ -102,11 +103,19 @@ const resetValidatorErrors = (isValidObj) => {
 const reducer = (state = initialState, action) => {
 
     switch(action.type) {
+        case 'USER_AUTHENTICATED':
+            return {
+                ...state,
+                auth: {
+                    ...state.auth,
+                    userId: action.payload
+                }
+            }
         case 'TASKS_LOADED':
             return {
                 ...state,
                 error: null,
-                tasks: action.payload,
+                tasks: action.payload.map ? action.payload : [],
                 load: false
             };
         case 'TASKS_LOADING':

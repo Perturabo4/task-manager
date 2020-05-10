@@ -47,13 +47,13 @@ const TaskList = ({error, load, tasks, isTask}) => {
     );
 }
 
-const TaskListContainer = ({ load, tasks, error, fetchTasks }) => {
+const TaskListContainer = ({ auth, load, tasks, error, fetchTasks }) => {
 
     useEffect(() => {
 
-        fetchTasks();
+        fetchTasks(auth.userId);
         
-    },[fetchTasks]);
+    },[fetchTasks, auth.userId]);
 
     const isTask = tasks.length > 0;
 
@@ -65,12 +65,13 @@ const TaskListContainer = ({ load, tasks, error, fetchTasks }) => {
              />
 }
 
-const mapStateToProps = ({tasks, load, error, filters}) => {
+const mapStateToProps = ({auth, tasks, load, error, filters}) => {
 
     return {
         tasks: getVisibilityTasks(tasks, filters), 
         load, 
-        error
+        error,
+        auth
     };
 }
 const mapDispatchToProps = (dispatch, { TaskService }) => {

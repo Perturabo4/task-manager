@@ -1,13 +1,17 @@
 import React from 'react';
+import {Redirect} from 'react-router-dom';
 import {connect} from 'react-redux';
 import WithAuthService from '../hoc/with-auth-service';
 import {compose} from '../../utils';
-import {setAuthEmail, setAuthPass, registerNewUser} from '../../actions';
+import {setAuthEmail, setAuthPass, authUser} from '../../actions';
 import Button from '../button';
 
 import './auth.scss';
 
-const Auth = ({email, pass, setAuthEmail, setAuthPass, sighnUp}) => {
+const Auth = ({email, pass, userId, setAuthEmail, setAuthPass, authUser}) => {
+    if(userId) {
+        return <Redirect to={"/app"}/>
+    }
     const buttonActive = !email || !pass ? 'disabled' : '';
     return (
         <form 
@@ -38,11 +42,12 @@ const Auth = ({email, pass, setAuthEmail, setAuthPass, sighnUp}) => {
             <Button
                 cls={['red', buttonActive]}
                 text={"Войти"}
+                onClick={() => authUser(email, pass)}  
             />
             <Button 
                 cls={['red', buttonActive]}
                 text={"Зарегистрироваться"} 
-                onClick={() => sighnUp(email, pass)}  
+                onClick={() => authUser(email, pass, true)}  
             />
         </form>
     )
@@ -54,7 +59,7 @@ const mapDispatchToProps = (dispatch, {AuthService}) => {
       return {
         setAuthEmail: (email) => dispatch(setAuthEmail(email)),
         setAuthPass: (pass) => dispatch(setAuthPass(pass)),
-        sighnUp: registerNewUser(dispatch, AuthService)
+        authUser: authUser(dispatch, AuthService)
       }
 }
 
