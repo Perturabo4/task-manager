@@ -4,9 +4,11 @@ import {filterTitle} from '../../actions';
 
 import './search-bar.scss';
 
+const submitHandler = (e) => e.preventDefault(); 
+
 const SearchBar = ({filters, filterTitle}) => {
     return (
-        <form className="search-form">
+        <form className="search-form" onSubmit={submitHandler}>
             <div className="input-field">
                 <input 
                     id="search" 

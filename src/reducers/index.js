@@ -2,7 +2,8 @@ const initialState = {
     auth: {
         email: '',
         pass: '',
-        userId: ''
+        userId: '',
+        token: ''
     },
     tasks: [],
     load: true,
@@ -108,7 +109,8 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 auth: {
                     ...state.auth,
-                    userId: action.payload
+                    userId: action.payload.localId,
+                    token: action.payload.idToken
                 }
             }
         case 'TASKS_LOADED':

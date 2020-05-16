@@ -145,13 +145,17 @@ const userAuthenticated = (userId) => {
 }
 
 const authUser = (dispatch, service) => async (email, pass, token) => {
-    const userData = await service.auth(email, pass, token);
+    const response = await service.auth(email, pass, token);
 
-    console.log(userData);
+    const expirationDate = new Date( new Date().getTime() + response.expiresIn * 1000);
 
-    const {localId} = userData;
+    localStorage.setItem('token', response.idToken);
+    localStorage.setItem('userId', response.localId);
+    localStorage.setItem('expirationDate', expirationDate);
 
-    dispatch(userAuthenticated(localId));
+    console.log(response);
+
+    dispatch(userAuthenticated(response));
 
 }
 
@@ -198,6 +202,7 @@ const deleteTask = (dispatch, service) => (id, userId) => {
     dispatch(tasksLoading(true));
     return service.deleteTask(id, userId)
         .then( res => {
+            console.log(res.json());
             dispatch(taskDelete(id));
             dispatch(tasksLoading(false));
         })
@@ -205,7 +210,6 @@ const deleteTask = (dispatch, service) => (id, userId) => {
             dispatch(tasksError(err));
         })
 }
-
 
 export { fetchTasks,
          addTask,

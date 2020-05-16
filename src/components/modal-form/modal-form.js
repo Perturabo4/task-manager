@@ -8,7 +8,19 @@ import Select from '../select';
 import {addTask, tasksSave, setTitle, setText, setImg, setPriority, isValidTask, createTask, updateTask} from '../../actions';
 import './modal-form.scss';
 
-const ModalForm = ({auth, isEdit, newTask, addTask, tasksSave, setTitle, setText, setImg, setPriority, isValid, isValidTask, createTask, updateTask }) => {
+const ModalForm = ({auth, 
+                    isEdit, 
+                    newTask, 
+                    addTask, 
+                    tasksSave, 
+                    setTitle, 
+                    setText, 
+                    setImg, 
+                    setPriority, 
+                    isValid, 
+                    isValidTask, 
+                    createTask, 
+                    updateTask }) => {
     
     let {title} = isValid;
     const {userId} = auth;

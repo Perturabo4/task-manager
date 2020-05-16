@@ -7,16 +7,16 @@ import Button from '../button';
 
 import './dropdown.scss';
 
-const Dropdown = ({open, id, done, taskOpen, deleteTask, updateTask, taskDone, taskEdit}) => {
+const Dropdown = ({auth, open, id, done, taskOpen, deleteTask, updateTask, taskDone, taskEdit}) => {
     return (
         <div className={`dropdown-wrapper ${open ? 'active' : ''}`}>
             <Button
-            text={'...'}
-            onClick={() => taskOpen(id)}
+                text={'...'}
+                onClick={() => taskOpen(id)}
             />
 
             <ul id="dropdown1" className="dropdown-content" >
-                <li onClick={() => updateTask(id, null, ['done', !done])}>
+                <li onClick={() => updateTask(id, null, ['done', !done], auth.userId)}>
                     <span>Выполнено</span>
                 </li>
                 <li className="divider" tabIndex="-1"></li>
@@ -24,13 +24,15 @@ const Dropdown = ({open, id, done, taskOpen, deleteTask, updateTask, taskDone, t
                     <span>Редактировать</span>
                 </li>
                 <li className="divider" tabIndex="-1"></li>
-                <li onClick={() => deleteTask(id)}>
+                <li onClick={() => deleteTask(id, auth.userId)}>
                     <span>Удалить</span>
                 </li>
             </ul>
         </div>
     )
 }
+
+const mapStateToProps = ({auth}) => ({auth});
 
 const mapDispatchToProps = (dispatch, {TaskService}) => {
     return {
@@ -44,5 +46,5 @@ const mapDispatchToProps = (dispatch, {TaskService}) => {
 
 export default compose(
     WithTaskService(),
-    connect(null, mapDispatchToProps)
+    connect(mapStateToProps, mapDispatchToProps)
 )(Dropdown);

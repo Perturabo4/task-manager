@@ -24,7 +24,7 @@ const Priority = ({priority}) => {
     );
 }
 
-const Card = ( {task, updateTask} ) => {
+const Card = ( {auth, task, updateTask} ) => {
     const {done, imgSrc, title, text, id, open, priority, inProgres} = task;
     const classes = [];
 
@@ -41,7 +41,7 @@ const Card = ( {task, updateTask} ) => {
             <div className="card-shadow">
                 {inProgres && <Spinner />}
             </div>
-            {done && <CheckBox onChange={() => updateTask(id, null, ['done', false])}/>}
+            {done && <CheckBox onChange={() => updateTask(id, null, ['done', false], auth.userId)}/>}
             <div className="card-image">
                 <img src={ imgSrc } alt="IMG"/>
                 <span className="card-title">{ title }</span>
@@ -57,6 +57,8 @@ const Card = ( {task, updateTask} ) => {
     )
 }
 
+const mapStateToProps = ({auth}) => ({auth});
+
 const mapDispatchToProps = (dispatch, {TaskService}) => {
     return {
         updateTask: updateTask(dispatch, TaskService)
@@ -65,5 +67,5 @@ const mapDispatchToProps = (dispatch, {TaskService}) => {
     
 export default compose(
         WithTaskService(),
-        connect(null, mapDispatchToProps)
+        connect(mapStateToProps, mapDispatchToProps)
     )(Card);
