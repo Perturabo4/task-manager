@@ -30,7 +30,7 @@ const SearchBar = ({filters, filterTitle}) => {
                 to='/logout' 
                 exact={true} 
             >
-                Выход
+                Выйти
             </NavLink>
         </ul>
         

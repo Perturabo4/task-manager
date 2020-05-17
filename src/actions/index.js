@@ -163,6 +163,28 @@ const autoLogout = (time, dispatch) => {
     );
 }
 
+const autoLogin = (dispatch) => {
+
+    return (
+        () => {
+                const token = localStorage.getItem('token');
+                const userId = localStorage.getItem('userId');
+
+                if(!token) {
+                    dispatch(logout());
+                } else {
+                    const expirationDate = new Date(localStorage.getItem('expirationDate'));
+                    if(expirationDate <= new Date()) {
+                        dispatch(logout());
+                    } else {
+                        dispatch(userAuthenticated({idToken: token, localId: userId}));
+                        autoLogout((expirationDate.getTime() - new Date().getTime()) / 1000, dispatch);
+                    }
+                }
+        }
+    )
+}
+
 const authUser = (dispatch, service) => async (email, pass, token) => {
     const response = await service.auth(email, pass, token);
     const {expiresIn, idToken, localId} = response;
@@ -252,5 +274,6 @@ export { fetchTasks,
          setAuthEmail,
          setAuthPass,
          authUser,
-         logout
+         logout,
+         autoLogin
         };
