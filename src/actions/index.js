@@ -137,25 +137,45 @@ const setAuthPass = (pass) => {
     }
 }
 
-const userAuthenticated = (userId) => {
+const userAuthenticated = (userData) => {
     return {
         type: 'USER_AUTHENTICATED',
-        payload: userId
+        payload: userData
     }
+}
+
+const logout = () => {
+
+    localStorage.removeItem('token');
+    localStorage.removeItem('userId');
+    localStorage.removeItem('expirationDate');
+
+    return {
+        type: 'AUTH_LOGOUT'
+    }
+}
+
+const autoLogout = (time, dispatch) => {
+    return (
+        setTimeout(() => {
+            dispatch(logout())
+        }, time * 1000)
+    );
 }
 
 const authUser = (dispatch, service) => async (email, pass, token) => {
     const response = await service.auth(email, pass, token);
+    const {expiresIn, idToken, localId} = response;
+    const expirationDate = new Date( new Date().getTime() + expiresIn * 1000);
 
-    const expirationDate = new Date( new Date().getTime() + response.expiresIn * 1000);
-
-    localStorage.setItem('token', response.idToken);
-    localStorage.setItem('userId', response.localId);
+    localStorage.setItem('token', idToken);
+    localStorage.setItem('userId', localId);
     localStorage.setItem('expirationDate', expirationDate);
 
     console.log(response);
 
     dispatch(userAuthenticated(response));
+    autoLogout(expiresIn, dispatch);
 
 }
 
@@ -231,5 +251,6 @@ export { fetchTasks,
          updateTask,
          setAuthEmail,
          setAuthPass,
-         authUser
+         authUser,
+         logout
         };

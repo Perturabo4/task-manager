@@ -104,6 +104,16 @@ const resetValidatorErrors = (isValidObj) => {
 const reducer = (state = initialState, action) => {
 
     switch(action.type) {
+        case 'AUTH_LOGOUT':
+            return {
+                ...state,
+                auth: {
+                        email: '',
+                        pass: '',
+                        userId: '',
+                        token: ''
+                    }
+            }
         case 'USER_AUTHENTICATED':
             return {
                 ...state,

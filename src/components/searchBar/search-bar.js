@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {filterTitle} from '../../actions';
+import {NavLink} from 'react-router-dom';
 
 import './search-bar.scss';
 
@@ -8,6 +9,7 @@ const submitHandler = (e) => e.preventDefault();
 
 const SearchBar = ({filters, filterTitle}) => {
     return (
+        <>
         <form className="search-form" onSubmit={submitHandler}>
             <div className="input-field">
                 <input 
@@ -23,6 +25,16 @@ const SearchBar = ({filters, filterTitle}) => {
                 <i className="material-icons">close</i>
             </div>
         </form>
+        <ul id="nav-mobile" className="right hide-on-med-and-down">
+            <NavLink 
+                to='/logout' 
+                exact={true} 
+            >
+                Выход
+            </NavLink>
+        </ul>
+        
+        </>
     )
 }
 

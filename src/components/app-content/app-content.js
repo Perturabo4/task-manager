@@ -7,6 +7,8 @@ import SearchBar from '../searchBar';
 import TopLine from '../top-line';
 import ModalForm from '../modal-form';
 
+import './app-content.scss';
+
 const AppContent = ({taskOpen}) => {
     return (
         <div className="wrapper" onClick={() => taskOpen()}>
