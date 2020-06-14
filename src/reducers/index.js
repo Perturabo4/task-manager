@@ -30,6 +30,29 @@ function getEmptyTask () {
         open: false,
         inProgres: false
     }
+    /*
+        return {
+        title: {
+            text: '',
+            errorMessage: '',
+            touched: false
+        },
+        text: {
+            text: '',
+            errorMessage: '',
+            touched: false
+        },
+        imgSrc: {
+            text: '',
+            errorMessage: '',
+            touched: false
+        },
+        priority: 'normal',
+        done: false,
+        open: false,
+        inProgres: false
+    }
+    */
 }
 const getTaskToEdit = (tasks, id) => {
     if(!id) return getEmptyTask();
@@ -176,31 +199,32 @@ const reducer = (state = initialState, action) => {
                 isEdit: false,
                 tasks: setTaskInProgres(state.tasks, action.payload)
             }
-        case 'SET_TITLE':
+        case 'SET_INPUT_VALUE':
+            const {name, value} = action.payload;
             return {
                 ...state,
                 newTask: {
                     ...state.newTask,
-                    title: action.payload
-                },
-                isValid: titleValidator(action.payload, state.isValid)
-            }
-        case 'SET_TEXT':
-            return {
-                ...state,
-                newTask: {
-                    ...state.newTask,
-                    text: action.payload
+                    [name]: value
                 }
+                // isValid: titleValidator(action.payload, state.isValid)
             }
-        case 'SET_IMG':
-            return {
-                ...state,
-                newTask: {
-                    ...state.newTask,
-                    imgSrc: action.payload
-                }
-            }
+        // case 'SET_TEXT':
+        //     return {
+        //         ...state,
+        //         newTask: {
+        //             ...state.newTask,
+        //             text: action.payload
+        //         }
+        //     }
+        // case 'SET_IMG':
+        //     return {
+        //         ...state,
+        //         newTask: {
+        //             ...state.newTask,
+        //             imgSrc: action.payload
+        //         }
+        //     }
         case 'SET_PRIORITY':
             return {
                 ...state,

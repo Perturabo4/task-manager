@@ -5,7 +5,7 @@ import WithTaskService from '../hoc';
 import Button from '../button';
 import Input from '../input';
 import Select from '../select';
-import {addTask, tasksSave, setTitle, setText, setImg, setPriority, isValidTask, createTask, updateTask} from '../../actions';
+import {addTask, tasksSave, setInputValue, setPriority, isValidTask, createTask, updateTask} from '../../actions';
 import './modal-form.scss';
 
 const ModalForm = ({auth, 
@@ -13,9 +13,7 @@ const ModalForm = ({auth,
                     newTask, 
                     addTask, 
                     tasksSave, 
-                    setTitle, 
-                    setText, 
-                    setImg, 
+                    setInputValue, 
                     setPriority, 
                     isValid, 
                     isValidTask, 
@@ -34,7 +32,8 @@ const ModalForm = ({auth,
                     <Input 
                         id="task_title"
                         label="Заголовок"
-                        onChange={(e) => setTitle(e.target.value)}
+                        name="title"
+                        onChange={(e) => setInputValue({value: e.target.value, name: e.target.name})}
                         value={newTask.title}
                         err={title ? '' : 'Поле обязательное !'}
 
@@ -42,14 +41,16 @@ const ModalForm = ({auth,
                     <Input 
                         id="task_text"
                         label="Текст задачи"
+                        name="text"
                         type="textarea"
-                        onChange={(e) => setText(e.target.value)}
+                        onChange={(e) => setInputValue({value: e.target.value, name: e.target.name})}
                         value={newTask.text}
                     />
                     <Input 
                         id="task_img_src"
                         label="Ссылка на картинку"
-                        onChange={(e) => setImg(e.target.value)}
+                        name="imgSrc"
+                        onChange={(e) => setInputValue({value: e.target.value, name: e.target.name})}
                         value={newTask.imgSrc}
                     />
                     <Select 
@@ -88,9 +89,7 @@ const mapDispatchToProps = (dispatch, {TaskService}) => {
     return {
         addTask: (isEdit) => dispatch(addTask(isEdit)),
         tasksSave: (newTask) => dispatch(tasksSave(newTask)),
-        setTitle: (title) => dispatch(setTitle(title)),
-        setText: (text) => dispatch(setText(text)),
-        setImg: (imgSrc) => dispatch(setImg(imgSrc)),
+        setInputValue: (obj) => dispatch(setInputValue(obj)),
         setPriority: (priority) => dispatch(setPriority(priority)),
         isValidTask: () => dispatch(isValidTask()),
         createTask: createTask(dispatch, TaskService),

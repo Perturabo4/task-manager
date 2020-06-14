@@ -19,26 +19,26 @@ const addTask = (edit) => {
     }
 }
 
-const setTitle = (title) => {
+const setInputValue = (obj) => {
     return {
-        type: 'SET_TITLE',
-        payload: title
+        type: 'SET_INPUT_VALUE',
+        payload: obj
     }
 }
 
-const setText = (text) => {
-    return {
-        type: 'SET_TEXT',
-        payload: text
-    }
-}
+// const setText = (text) => {
+//     return {
+//         type: 'SET_TEXT',
+//         payload: text
+//     }
+// }
 
-const setImg = (imgSrc) => {
-    return {
-        type: 'SET_IMG',
-        payload: imgSrc
-    }
-}
+// const setImg = (imgSrc) => {
+//     return {
+//         type: 'SET_IMG',
+//         payload: imgSrc
+//     }
+// }
 
 const setPriority = (priority) => {
     return {
@@ -256,9 +256,10 @@ const deleteTask = (dispatch, service) => (id, userId) => {
 export { fetchTasks,
          addTask,
          tasksSave,
-         setTitle,
-         setText,
-         setImg,
+        //  setTitle,
+        //  setText,
+        //  setImg,
+         setInputValue,
          setPriority,
          taskOpen,
          taskDone,

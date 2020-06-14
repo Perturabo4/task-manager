@@ -1,7 +1,7 @@
 import React from 'react';
 import './input.scss';
 
-const CheckType = ({id, type, cls=[], onChange, value, err}) => {
+const CheckType = ({id, type, cls=[], onChange, value, name, err}) => {
 
     const classes = [...cls, err ? 'err': ''].join(' ');
 
@@ -13,6 +13,7 @@ const CheckType = ({id, type, cls=[], onChange, value, err}) => {
                     id={id} 
                     className={`materialize-textarea ${classes}`}
                     onChange={onChange}
+                    name={name}
                     value={value}
                 >
                 </textarea> 
@@ -24,6 +25,7 @@ const CheckType = ({id, type, cls=[], onChange, value, err}) => {
                     type="text" 
                     className={`validate ${classes}`}
                     onChange={onChange}
+                    name={name}
                     value={value} 
                 />
             );
