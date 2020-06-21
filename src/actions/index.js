@@ -26,20 +26,6 @@ const setInputValue = (obj) => {
     }
 }
 
-// const setText = (text) => {
-//     return {
-//         type: 'SET_TEXT',
-//         payload: text
-//     }
-// }
-
-// const setImg = (imgSrc) => {
-//     return {
-//         type: 'SET_IMG',
-//         payload: imgSrc
-//     }
-// }
-
 const setPriority = (priority) => {
     return {
         type: 'SET_PRIORITY',
@@ -100,12 +86,6 @@ const filterTitle = (value) => {
     return {
         type: 'FILTER_TITLE',
         payload: value
-    }
-}
-
-const isValidTask = () => {
-    return {
-        type: 'IS_VALID_TASK'
     }
 }
 
@@ -215,7 +195,9 @@ const createTask = (dispatch, service) => (task, userId) => {
 
     dispatch(tasksLoading(true));
 
-    return service.createTask(task, userId)
+    const {id, ...rest} = task;
+
+    return service.createTask(rest, userId)
         .then( res => res.json())
         .then(data => {
             dispatch(tasksSave({...task, id: data.name}));
@@ -255,10 +237,6 @@ const deleteTask = (dispatch, service) => (id, userId) => {
 
 export { fetchTasks,
          addTask,
-         tasksSave,
-        //  setTitle,
-        //  setText,
-        //  setImg,
          setInputValue,
          setPriority,
          taskOpen,
@@ -267,7 +245,6 @@ export { fetchTasks,
          filterDone,
          filterPriority,
          filterTitle,
-         isValidTask,
          taskInProgres,
          createTask,
          deleteTask,

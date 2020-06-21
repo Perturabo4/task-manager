@@ -5,22 +5,18 @@ import WithTaskService from '../hoc';
 import Button from '../button';
 import Input from '../input';
 import Select from '../select';
-import {addTask, tasksSave, setInputValue, setPriority, isValidTask, createTask, updateTask} from '../../actions';
+import {addTask, setInputValue, setPriority, createTask, updateTask} from '../../actions';
 import './modal-form.scss';
 
 const ModalForm = ({auth, 
                     isEdit, 
                     newTask, 
                     addTask, 
-                    tasksSave, 
                     setInputValue, 
                     setPriority, 
-                    isValid, 
-                    isValidTask, 
                     createTask, 
                     updateTask }) => {
     
-    let {title} = isValid;
     const {userId} = auth;
 
     const styles = {display: isEdit ? 'block' : 'none'}
@@ -35,8 +31,6 @@ const ModalForm = ({auth,
                         name="title"
                         onChange={(e) => setInputValue({value: e.target.value, name: e.target.name})}
                         value={newTask.title}
-                        err={title ? '' : 'Поле обязательное !'}
-
                     />
                     <Input 
                         id="task_text"
@@ -80,18 +74,16 @@ const ModalForm = ({auth,
     )
 }
 
-const mapStateToProps = ({auth, isEdit, newTask, isValid}) => {
-    return { isEdit, newTask, isValid, auth };
+const mapStateToProps = ({auth, allTasks: {isEdit, newTask}}) => {
+    return { isEdit, newTask, auth };
 }
 
 const mapDispatchToProps = (dispatch, {TaskService}) => {
 
     return {
         addTask: (isEdit) => dispatch(addTask(isEdit)),
-        tasksSave: (newTask) => dispatch(tasksSave(newTask)),
         setInputValue: (obj) => dispatch(setInputValue(obj)),
         setPriority: (priority) => dispatch(setPriority(priority)),
-        isValidTask: () => dispatch(isValidTask()),
         createTask: createTask(dispatch, TaskService),
         updateTask: updateTask(dispatch, TaskService)
     }

@@ -24,7 +24,7 @@ const getVisibilityTasks = (tasks, filters) => {
     return filteredTasks;
 }
 
-const TaskList = ({error, load, tasks, isTask}) => {
+const TaskList = ({ error, load, tasks, isTask}) => {
 
     if(error) {
         return (
@@ -65,7 +65,9 @@ const TaskListContainer = ({ auth, load, tasks, error, fetchTasks }) => {
              />
 }
 
-const mapStateToProps = ({auth, tasks, load, error, filters}) => {
+const mapStateToProps = ({auth, allTasks, filters}) => {
+    
+    const {tasks, load, error} = allTasks;
 
     return {
         tasks: getVisibilityTasks(tasks, filters), 
