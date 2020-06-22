@@ -16,37 +16,15 @@
     }
 
     .card-wrapper {
-        display: flex;
-        justify-content: flex-start;
-        flex-wrap: wrap;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        grid-gap: 16px;
         
         .card {
-            margin-right: 20px;
-            min-width: 200px;
-            max-width: 30%;
-        }
-    }
-
-}
-
-@media screen and (max-width: 802px) {
-    .wrapper {
-        .card-wrapper {
-            .card {
-                max-width: 45%;
-            }
-        }
-    }
-}
-
-@media screen and (max-width: 520px) {
-    .wrapper {
-        .card-wrapper {
+            display: flex;
             flex-direction: column;
-            align-items: center;
-            .card {
-                max-width: 80%;
-            }
+            justify-content: space-between;
         }
     }
+
 }

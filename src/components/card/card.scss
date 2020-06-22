@@ -1,4 +1,8 @@
 .card {
+    .card-shadow {
+        display: none;
+    }
+
     &.done,
     &.inProgres {
         .card-shadow {
