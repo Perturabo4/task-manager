@@ -4,7 +4,7 @@ const initialState = {
         taskTitle: ''
     };
 
-    const setFilterDone = (filters, doneValue) => {
+    const setFilterDone = (state, doneValue) => {
         let done;
     
         switch (doneValue) {
@@ -18,31 +18,21 @@ const initialState = {
                 done = true;
                 break;
             default:
-                return filters;
+                return state;
         }
     
-        return {...filters, done}
+        return {...state, done}
     }
 
     const filtersReducer = (state = initialState, action) => {
 
         switch(action.type) {    
             case 'FILTER_DONE':
-                return {
-                    ...state,
-                    filters: setFilterDone(state.filters, action.payload)
-                }
+                return setFilterDone(state, action.payload);
             case 'FILTER_PRIORITY':
-                return {
-                    ...state,
-                    filters: {...state.filters, priority: action.payload}
-                }
+                return {...state, priority: action.payload};
             case 'FILTER_TITLE':
-                return {
-                    ...state,
-                    filters: {...state.filters, taskTitle: action.payload}
-                }
-            
+                return {...state, taskTitle: action.payload}
             default:
                 return state;
         }
