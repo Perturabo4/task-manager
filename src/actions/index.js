@@ -174,8 +174,6 @@ const authUser = (dispatch, service) => async (email, pass, token) => {
     localStorage.setItem('userId', localId);
     localStorage.setItem('expirationDate', expirationDate);
 
-    console.log(response);
-
     dispatch(userAuthenticated(response));
     autoLogout(expiresIn, dispatch);
 
