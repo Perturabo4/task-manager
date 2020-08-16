@@ -26,6 +26,10 @@
         transform: translate(60%, -20%);
     }
 
+    .card-content {
+        text-align: left;
+    }
+
     .card-action {
         display: flex;
         justify-content: space-between;
