@@ -3,10 +3,10 @@ import {connect} from 'react-redux';
 import WithTaskService from '../hoc';
 import {fetchTasks} from '../../actions';
 import {compose} from '../../utils';
-
-import Card from '../card';
 import Spinner from '../spinner';
+import Card from '../card';
 import './task-list.scss';
+
 
 const getVisibilityTasks = (tasks, filters) => {
     let filteredTasks = [...tasks];
@@ -37,10 +37,12 @@ const TaskList = ({ error, load, tasks, isTask}) => {
     return (
         <>
            {
-               load
+              load 
                 ? <Spinner />
-                : isTask 
-                    ? tasks.map( task => <Card task={task} key={task.id} inProgres={task.inProgres}/>)
+                : isTask
+                    ? <div className="card-wrapper">
+                        {tasks.map( task => <Card task={task} key={task.id} inProgres={task.inProgres}/>)}
+                      </div>
                     : <div className="no-tasks">Список задач пуст</div>
            }
         </>

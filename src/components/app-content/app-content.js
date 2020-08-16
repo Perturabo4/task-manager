@@ -9,7 +9,7 @@ import ModalForm from '../modal-form';
 
 import './app-content.scss';
 
-const AppContent = ({taskOpen}) => {
+const AppContent = ({taskOpen, load, isTask}) => {
     return (
         <div className="wrapper" onClick={() => taskOpen()}>
             <header className="header">
@@ -24,10 +24,8 @@ const AppContent = ({taskOpen}) => {
                 <div className="container">
                     <div className="row">
                         <div className="col s12">
-                            <div className="card-wrapper">
-                                <TaskListContainer />
-                                <ModalForm />
-                            </div>
+                            <TaskListContainer />
+                            <ModalForm />
                         </div>
                     </div>
                 </div>
@@ -39,10 +37,6 @@ const AppContent = ({taskOpen}) => {
     )
 }
 
-const mapStateToProps = () => {
-    return {}
-}
-
 const mapDispatchToProps = (dispatch) => {
     
     return {
@@ -50,4 +44,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AppContent);
+export default connect(null, mapDispatchToProps)(AppContent);
