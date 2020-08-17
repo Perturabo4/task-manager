@@ -1,6 +1,5 @@
 import React from 'react';
 import {connect} from 'react-redux';
-
 import {taskOpen} from '../../actions';
 import TaskListContainer from '../task-list';
 import SearchBar from '../searchBar';

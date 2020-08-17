@@ -25,7 +25,7 @@ const SearchBar = ({filters, filterTitle}) => {
                 <i className="material-icons">close</i>
             </div>
         </form>
-        <ul id="nav-mobile" className="right hide-on-med-and-down">
+        <ul id="nav-mobile" className="right">
             <NavLink 
                 to='/logout' 
                 exact={true} 

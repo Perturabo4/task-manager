@@ -2,6 +2,12 @@
     display: flex;
     justify-content: center;
     margin: 20px;
+
+    .input-field.col,
+    .btn {
+        margin: 20px;
+    }
+
 }
 @media screen and (max-width: 485px) {
     .top-line {
