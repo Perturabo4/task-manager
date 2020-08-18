@@ -1,125 +1,127 @@
+import * as Types from '../action-types';
+
 const tasksLoaded = (newTasks) => {
     return {
-        type: 'TASKS_LOADED', 
+        type: Types.TASKS_LOADED, 
         payload: newTasks
     };
 };
 
 const tasksError = (error) => {
     return {
-        type: 'TASKS_ERROR', 
+        type: Types.TASKS_ERROR, 
         payload: error
     };
 };
 
 const addTask = (edit) => {
     return {
-        type: 'ADD_TASK',
+        type: Types.ADD_TASK,
         payload: edit
     }
 }
 
 const setInputValue = (obj) => {
     return {
-        type: 'SET_INPUT_VALUE',
+        type: Types.SET_INPUT_VALUE,
         payload: obj
     }
 }
 
 const setPriority = (priority) => {
     return {
-        type: 'SET_PRIORITY',
+        type: Types.SET_PRIORITY,
         payload: priority
     }
 }
 
 const tasksSave = (obj) => {
     return {
-        type: 'TASKS_SAVE',
+        type: Types.TASKS_SAVE,
         payload: obj
     }
 }
 
 const taskOpen = (id) => {
     return {
-        type: 'TASK_OPEN',
+        type: Types.TASK_OPEN,
         payload: id
     }
 }
 
 const taskDelete = (id) => {
     return {
-        type: 'TASK_DELETE',
+        type: Types.TASK_DELETE,
         payload: id
     }
 }
 
 const taskEdit = (id) => {
     return {
-        type: 'TASK_EDIT',
+        type: Types.TASK_EDIT,
         payload: id
     }
 }
 
 const taskDone = (id) => {
     return {
-        type: 'TASK_DONE',
+        type: Types.TASK_DONE,
         payload: id
     }
 }
 
 const filterDone = (value) => {
     return {
-        type: 'FILTER_DONE',
+        type: Types.FILTER_DONE,
         payload: value
     }
 }
 
 const filterPriority = (value) => {
     return {
-        type: 'FILTER_PRIORITY',
+        type: Types.FILTER_PRIORITY,
         payload: value
     }
 }
 
 const filterTitle = (value) => {
     return {
-        type: 'FILTER_TITLE',
+        type: Types.FILTER_TITLE,
         payload: value
     }
 }
 
 const tasksLoading = (isLoading) => {
     return {
-        type: 'TASKS_LOADING',
+        type: Types.TASKS_LOADING,
         payload: isLoading
     }
 }
 
 const taskInProgres = (id) => {
     return {
-        type: 'TASK_IN_PROGRES',
+        type: Types.TASK_IN_PROGRES,
         payload: id
     }
 }
 
 const setAuthEmail = (text) => {
     return {
-        type: 'SET_AUTH_EMAIL',
+        type: Types.SET_AUTH_EMAIL,
         payload: text
     }
 }
 
 const setAuthPass = (pass) => {
     return {
-        type: 'SET_AUTH_PASS',
+        type: Types.SET_AUTH_PASS,
         payload: pass
     }
 }
 
 const userAuthenticated = (userData) => {
     return {
-        type: 'USER_AUTHENTICATED',
+        type: Types.USER_AUTHENTICATED,
         payload: userData
     }
 }
@@ -131,7 +133,7 @@ const logout = () => {
     localStorage.removeItem('expirationDate');
 
     return {
-        type: 'AUTH_LOGOUT'
+        type: Types.AUTH_LOGOUT
     }
 }
 
