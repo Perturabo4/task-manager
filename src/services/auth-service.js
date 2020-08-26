@@ -21,7 +21,6 @@ export default class AuthService {
                 },
                 body: JSON.stringify(authData)
             });
-
             return response.json();
         } catch (e) {
             throw new Error(e);

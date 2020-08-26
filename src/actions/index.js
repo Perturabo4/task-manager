@@ -145,6 +145,13 @@ const autoLogout = (time, dispatch) => {
     );
 }
 
+const authError = (error) => {
+    return {
+        type: Types.AUTH_ERROR,
+        payload: error
+    }
+}
+
 const autoLogin = (dispatch) => {
 
     return (
@@ -168,8 +175,15 @@ const autoLogin = (dispatch) => {
 }
 
 const authUser = (dispatch, service) => async (email, pass, token) => {
+
     const response = await service.auth(email, pass, token);
-    const {expiresIn, idToken, localId} = response;
+
+    const {expiresIn, idToken, localId, error} = response;
+
+    if(error) {
+        console.log(error);
+    }
+
     const expirationDate = new Date( new Date().getTime() + expiresIn * 1000);
 
     localStorage.setItem('token', idToken);
@@ -253,5 +267,6 @@ export { fetchTasks,
          setAuthPass,
          authUser,
          logout,
-         autoLogin
+         autoLogin,
+         authError
         };

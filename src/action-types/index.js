@@ -17,3 +17,4 @@ export const SET_AUTH_EMAIL = 'SET_AUTH_EMAIL';
 export const SET_AUTH_PASS = 'SET_AUTH_PASS';
 export const USER_AUTHENTICATED = 'USER_AUTHENTICATED';
 export const AUTH_LOGOUT = 'AUTH_LOGOUT';
+export const AUTH_ERROR = 'AUTH_ERROR';

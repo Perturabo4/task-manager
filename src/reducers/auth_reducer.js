@@ -2,7 +2,8 @@ const initialState = {
         email: '',
         pass: '',
         userId: '',
-        token: ''
+        token: '',
+        authError: null
     }
 
 const authReducer = (state = initialState, action) => {
@@ -29,6 +30,11 @@ const authReducer = (state = initialState, action) => {
             return {
                 ...state,
                 pass: action.payload
+            }
+        case 'AUTH_ERROR':
+            return {
+                ...state,
+                authError: action.payload
             }
         default:
             return state
