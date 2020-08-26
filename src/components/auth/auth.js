@@ -8,7 +8,9 @@ import Button from '../button';
 
 import './auth.scss';
 
-const Auth = ({email, pass, userId, setAuthEmail, setAuthPass, authUser}) => {
+const Auth = ({email, pass, userId, setAuthEmail, setAuthPass, authUser, authError}) => {
+
+   
     if(userId) {
         return <Redirect to={"/app"}/>
     }
@@ -39,6 +41,14 @@ const Auth = ({email, pass, userId, setAuthEmail, setAuthPass, authUser}) => {
                 <label htmlFor="password">Пароль</label>
                 <span className="helper-text" data-error="wrong"></span>
             </div>
+            
+            {
+                authError && (
+                    <div className="form-error">
+                        <span className="form-error__text">{authError}</span>
+                    </div>
+                )
+            }
             <Button
                 cls={['red', buttonActive]}
                 text={"Войти"}

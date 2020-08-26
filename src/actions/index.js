@@ -181,7 +181,8 @@ const authUser = (dispatch, service) => async (email, pass, token) => {
     const {expiresIn, idToken, localId, error} = response;
 
     if(error) {
-        console.log(error);
+        dispatch(authError(error.message));
+        return;
     }
 
     const expirationDate = new Date( new Date().getTime() + expiresIn * 1000);

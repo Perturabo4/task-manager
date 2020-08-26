@@ -6,6 +6,16 @@ const initialState = {
         authError: null
     }
 
+const authErrorHandler = (errorText) => {
+    switch(errorText) {
+        case 'INVALID_EMAIL':
+        case 'EMAIL_NOT_FOUND':
+            return 'Неверный логин или пароль';
+        default:
+            return 'Возникла ошибка при авторизации. Попробуйте повторить попытку позже.';
+    }
+}
+
 const authReducer = (state = initialState, action) => {
     switch(action.type) {
         case 'AUTH_LOGOUT':
@@ -34,7 +44,7 @@ const authReducer = (state = initialState, action) => {
         case 'AUTH_ERROR':
             return {
                 ...state,
-                authError: action.payload
+                authError: authErrorHandler(action.payload)
             }
         default:
             return state
