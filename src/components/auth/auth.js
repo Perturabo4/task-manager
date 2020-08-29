@@ -5,6 +5,7 @@ import WithAuthService from '../hoc/with-auth-service';
 import {compose} from '../../utils';
 import {setAuthEmail, setAuthPass, authUser} from '../../actions';
 import Button from '../button';
+import AuthError from '../auth-error';
 
 import './auth.scss';
 
@@ -44,11 +45,7 @@ const Auth = ({email, pass, userId, setAuthEmail, setAuthPass, authUser, authErr
             </div>
             
             {
-                authError && (
-                    <div className="form-error">
-                        <span className="form-error__text">{authError}</span>
-                    </div>
-                )
+                authError && <AuthError text={authError}/>
             }
             <Button
                 cls={['red', buttonActive]}
