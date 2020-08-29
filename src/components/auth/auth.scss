@@ -1,16 +1,23 @@
+.auth-background {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: #ee6e73;
+}
+
 .auth-form {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    padding: 1.2rem;
     max-width: 340px;
     min-width: 300px;
     text-align: center;
-
-    &.card-panel {
-        margin: 0;
-        padding: 1.2rem;
-    }
+    background-color: #fff;
+    border-radius: 2px;
     
     button {
         margin-right: 10px;

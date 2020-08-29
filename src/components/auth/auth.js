@@ -5,7 +5,6 @@ import WithAuthService from '../hoc/with-auth-service';
 import {compose} from '../../utils';
 import {setAuthEmail, setAuthPass, authUser} from '../../actions';
 import Button from '../button';
-import Input from '../input';
 
 import './auth.scss';
 
@@ -17,12 +16,13 @@ const Auth = ({email, pass, userId, setAuthEmail, setAuthPass, authUser, authErr
     }
     const buttonActive = !email || !pass ? 'disabled' : '';
     return (
+    <div className="auth-background">
         <form 
-            className="auth-form card-panel"
+            className="auth-form"
             onSubmit={(e) => e.preventDefault()}
         >
             <div className="input-field">
-                <Input 
+                <input 
                     id="email"
                     type="email"
                     className="validate"
@@ -33,7 +33,7 @@ const Auth = ({email, pass, userId, setAuthEmail, setAuthPass, authUser, authErr
                 <span className="helper-text" data-error="Неверный e-mail"></span>
             </div>
             <div className="input-field">
-                <Input 
+                <input 
                     id="password"
                     type="password"
                     className="validate"
@@ -61,6 +61,7 @@ const Auth = ({email, pass, userId, setAuthEmail, setAuthPass, authUser, authErr
                 onClick={() => authUser(email, pass, true)}  
             />
         </form>
+    </div>
     )
 }
 
