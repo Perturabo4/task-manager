@@ -11,7 +11,6 @@ import './app-content.scss';
 const AppContent = ({taskOpen}) => {
     return (
         <div className="wrapper" onClick={() => taskOpen()}>
-        {/* <div className="wrapper"> */}
             <header className="header">
                 <nav>
                     <div className="nav-wrapper">
