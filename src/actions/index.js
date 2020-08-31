@@ -152,6 +152,13 @@ const authError = (error) => {
     }
 }
 
+const validateTaskBeforeCreate = (task) => {
+    return {
+        type: Types.VALIDATE_TASK_BEFORE_CREATE,
+        payload: task
+    }
+}
+
 const autoLogin = (dispatch) => {
 
     return (
@@ -264,6 +271,7 @@ export { fetchTasks,
          createTask,
          deleteTask,
          updateTask,
+         validateTaskBeforeCreate,
          setAuthEmail,
          setAuthPass,
          authUser,
