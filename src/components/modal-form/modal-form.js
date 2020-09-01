@@ -5,14 +5,22 @@ import WithTaskService from '../hoc';
 import Button from '../button';
 import Input from '../input';
 import Select from '../select';
-import {addTask, setInputValue, setPriority, createTask, updateTask} from '../../actions';
+import {
+        addTask, 
+        setInputValue, 
+        setPriority, 
+        createTask, 
+        updateTask, 
+        validateTaskBeforeCreate
+    } from '../../actions';
 import './modal-form.scss';
 
 const ModalForm = ({auth, 
                     isEdit, 
                     newTask, 
                     addTask, 
-                    setInputValue, 
+                    setInputValue,
+                    validateTaskBeforeCreate, 
                     setPriority, 
                     createTask, 
                     updateTask }) => {
@@ -20,6 +28,15 @@ const ModalForm = ({auth,
     const {userId} = auth;
 
     const styles = {display: isEdit ? 'block' : 'none'}
+
+    const saveTaskHandler = (e) => {
+
+        validateTaskBeforeCreate(newTask);
+
+        newTask.id 
+            ? updateTask(newTask.id, newTask, false, userId) 
+            : createTask(newTask, userId);
+    }
 
     return (
         <div className="shadow" style={styles}>
@@ -62,7 +79,7 @@ const ModalForm = ({auth,
                 <div className="modal-footer">
                     <Button 
                         text="Сохранить" 
-                        onClick={(e) => newTask.id ? updateTask(newTask.id, newTask, false, userId) : createTask(newTask, userId) }
+                        onClick={saveTaskHandler}
                     />
                     <Button 
                         text="Отмена"
@@ -85,7 +102,8 @@ const mapDispatchToProps = (dispatch, {TaskService}) => {
         setInputValue: (obj) => dispatch(setInputValue(obj)),
         setPriority: (priority) => dispatch(setPriority(priority)),
         createTask: createTask(dispatch, TaskService),
-        updateTask: updateTask(dispatch, TaskService)
+        updateTask: updateTask(dispatch, TaskService),
+        validateTaskBeforeCreate: (task) => dispatch(validateTaskBeforeCreate(task))
     }
 }
 

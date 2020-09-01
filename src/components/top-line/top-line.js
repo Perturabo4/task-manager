@@ -4,14 +4,15 @@ import {connect} from 'react-redux';
 
 import {addTask, 
         filterDone, 
-        filterPriority 
+        filterPriority,
+        taskOpen
         } from '../../actions';
 import Button from '../button';
 import Select from '../select';
 
 import './top-line.scss';
 
-const TopLine = ({filters, filterDone, filterPriority, addTask}) => {
+const TopLine = ({filters, filterDone, filterPriority, addTask, taskOpen}) => {
 
     let done;
     if(filters.done === true) {
@@ -50,7 +51,10 @@ const TopLine = ({filters, filterDone, filterPriority, addTask}) => {
                     value={filters.priority}
                     onChange={(e) => filterPriority(e.target.value)}
                 />
-                <Button onClick={() => addTask(true)}
+                <Button onClick={() => {
+                    taskOpen(false);
+                    addTask(true);
+                }}
                     color='red'
                     text='Добавить задачу'
                 />
@@ -67,7 +71,8 @@ const mapDispatchToProps = (dispatch) => {
         {
             addTask,
             filterDone,
-            filterPriority
+            filterPriority,
+            taskOpen
         }, dispatch);
 }
 

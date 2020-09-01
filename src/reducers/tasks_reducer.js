@@ -1,3 +1,5 @@
+import {DEFAULT_IMG_SRC} from '../constants';
+
 const initialState = {
     tasks: [],
     load: true,
@@ -40,6 +42,7 @@ function getEmptyTask () {
     }
     */
 }
+
 const getTaskToEdit = (tasks, id) => {
     if(!id) return getEmptyTask();
 
@@ -74,6 +77,16 @@ const saveTask = (tasks, newTask) => {
     return index >= 0
             ? [...tasks.slice(0, index), newTask, ...tasks.slice(index + 1)]
             : [newTask, ...tasks];
+}
+
+const validateTask = (newTask) => {
+    const {imgSrc} = newTask;
+    
+    if(!imgSrc) {
+        newTask.imgSrc = DEFAULT_IMG_SRC;
+    }  
+
+    return newTask;
 }
 
 const tasksReducer = (state = initialState, action) => {
@@ -166,7 +179,11 @@ const tasksReducer = (state = initialState, action) => {
                     tasks: saveTask(state.tasks, action.payload),
                     isEdit: false,
                 }
-
+        case 'VALIDATE_TASK_BEFORE_CREATE':
+            return {
+                ...state,
+                newTask: validateTask(action.payload)
+            }
         default:
             return state
     }

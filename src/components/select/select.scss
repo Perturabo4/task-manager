@@ -1,3 +1,8 @@
-.input-field.col {
-    margin: 0 20px;
+.modal-content .input-field.col {
+    margin: 0;
+    padding: 0;
+}
+
+.modal-content .input-field.col label {
+    left: 0;
 }
