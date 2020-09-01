@@ -1,5 +1,7 @@
 import React from 'react';
 
+import './button.scss';
+
 const Button = ({cls=['red'], text='button', onClick= () => false}) => {
     const classes = cls.join(' ');
     return (
