@@ -11,7 +11,6 @@ import './auth.scss';
 
 const Auth = ({email, pass, userId, setAuthEmail, setAuthPass, authUser, authError}) => {
 
-   
     if(userId) {
         return <Redirect to={"/app"}/>
     }
