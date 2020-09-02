@@ -11,7 +11,7 @@ import './auth.scss';
 
 const Auth = ({email, pass, userId, setAuthEmail, setAuthPass, authUser, authError}) => {
 
-    if(userId) {
+    if(userId) { 
         return <Redirect to={"/app"}/>
     }
     const buttonActive = !email || !pass ? 'disabled' : '';

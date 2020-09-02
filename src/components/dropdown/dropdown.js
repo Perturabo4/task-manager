@@ -12,7 +12,7 @@ const Dropdown = ({auth, open, id, done, taskOpen, deleteTask, updateTask, taskD
         <div className={`dropdown-wrapper ${open ? 'active' : ''}`}>
             <Button
                 text={'...'}
-                onClick={() => taskOpen(id)}
+                onClick={() => taskOpen(id)} 
             />
 
             <ul id="dropdown1" className="dropdown-content" >
