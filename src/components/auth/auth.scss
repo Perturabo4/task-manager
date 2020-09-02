@@ -5,6 +5,12 @@
     bottom: 0;
     left: 0;
     background: #ee6e73;
+
+    h3 {
+        word-wrap: wrap;
+        text-align: center;
+        color: #fff;
+    }
 }
 
 .auth-form {

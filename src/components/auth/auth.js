@@ -18,6 +18,7 @@ const Auth = ({email, pass, userId, setAuthEmail, setAuthPass, authUser, authErr
     const buttonActive = !email || !pass ? 'disabled' : '';
     return (
     <div className="auth-background">
+        <h3>Войдите в систему или зарегист&shy;рируйтесь</h3>
         <form 
             className="auth-form"
             onSubmit={(e) => e.preventDefault()}
