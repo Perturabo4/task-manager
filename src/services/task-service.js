@@ -44,7 +44,6 @@ export default class TaskService {
   }
 
   deleteTask(id, userId) {
-    console.log(`${this.apiUrl} ${userId}/tasks/${id}.json`);
     return fetch(`${this.apiUrl} ${userId}/tasks/${id}.json`, {
       method: "DELETE",
     });
