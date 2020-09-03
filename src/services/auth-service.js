@@ -10,7 +10,7 @@ export default class AuthService {
 
     let url = isRegister
       ? `${SIGHN_UP_URL}${API_KEY}`
-      : `${SIGHN_IP_URL}${API_KEY}`;
+      : `${SIGHN_IN_URL}${API_KEY}`;
 
     try {
       const response = await fetch(url, {
