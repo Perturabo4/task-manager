@@ -7,7 +7,6 @@ const initialState = {
 };
 
 const authErrorHandler = (errorText) => {
-  console.log(errorText);
   let text = errorText.includes(" ")
     ? errorText.slice(0, errorText.indexOf(" "))
     : errorText;
