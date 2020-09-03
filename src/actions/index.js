@@ -105,17 +105,10 @@ const taskInProgres = (id) => {
   };
 };
 
-const setAuthEmail = (text) => {
+const setAuthInputValue = (obj) => {
   return {
-    type: Types.SET_AUTH_EMAIL,
-    payload: text,
-  };
-};
-
-const setAuthPass = (pass) => {
-  return {
-    type: Types.SET_AUTH_PASS,
-    payload: pass,
+    type: Types.SET_AUTH_INPUT_VALUE,
+    payload: obj,
   };
 };
 
@@ -269,8 +262,7 @@ export {
   deleteTask,
   updateTask,
   validateTaskBeforeCreate,
-  setAuthEmail,
-  setAuthPass,
+  setAuthInputValue,
   authUser,
   logout,
   autoLogin,

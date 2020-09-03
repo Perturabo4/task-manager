@@ -3,7 +3,7 @@ import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import WithAuthService from "../hoc/with-auth-service";
 import { compose } from "../../utils";
-import { setAuthEmail, setAuthPass, authUser } from "../../actions";
+import { setAuthInputValue, authUser } from "../../actions";
 import Button from "../button";
 import AuthError from "../auth-error";
 
@@ -13,15 +13,15 @@ const Auth = ({
   email,
   pass,
   userId,
-  setAuthEmail,
-  setAuthPass,
+  setAuthInputValue,
   authUser,
   authError,
 }) => {
   if (userId) {
     return <Redirect to={"/app"} />;
   }
-  const buttonActive = !email || !pass ? "disabled" : "";
+  const buttonActive = !email.value || !pass.value ? "disabled" : "";
+  console.log(pass.value);
   return (
     <div className="auth-background">
       <form className="auth-form" onSubmit={(e) => e.preventDefault()}>
@@ -30,8 +30,11 @@ const Auth = ({
             id="email"
             type="email"
             className="validate"
-            value={email}
-            onChange={(e) => setAuthEmail(e.target.value)}
+            name="email"
+            value={email.value}
+            onChange={(e) =>
+              setAuthInputValue({ name: e.target.name, value: e.target.value })
+            }
           />
           <label htmlFor="email">Email</label>
           <span className="helper-text" data-error="Неверный e-mail"></span>
@@ -41,7 +44,11 @@ const Auth = ({
             id="password"
             type="password"
             className="validate"
-            onChange={(e) => setAuthPass(e.target.value)}
+            name="pass"
+            value={pass.value}
+            onChange={(e) =>
+              setAuthInputValue({ name: e.target.name, value: e.target.value })
+            }
           />
           <label htmlFor="password">Пароль</label>
           <span className="helper-text" data-error="wrong"></span>
@@ -67,8 +74,7 @@ const mapStateToProps = ({ auth }) => auth;
 
 const mapDispatchToProps = (dispatch, { AuthService }) => {
   return {
-    setAuthEmail: (email) => dispatch(setAuthEmail(email)),
-    setAuthPass: (pass) => dispatch(setAuthPass(pass)),
+    setAuthInputValue: (obj) => dispatch(setAuthInputValue(obj)),
     authUser: authUser(dispatch, AuthService),
   };
 };

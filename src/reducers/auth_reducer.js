@@ -1,6 +1,12 @@
 const initialState = {
-  email: "",
-  pass: "",
+  email: {
+    value: "",
+    errorMessage: null,
+  },
+  pass: {
+    value: "",
+    errorMessage: null,
+  },
   userId: "",
   token: "",
   authError: null,
@@ -31,8 +37,14 @@ const authReducer = (state = initialState, action) => {
   switch (action.type) {
     case "AUTH_LOGOUT":
       return {
-        email: "",
-        pass: "",
+        email: {
+          value: "",
+          errorMessage: null,
+        },
+        pass: {
+          value: "",
+          errorMessage: null,
+        },
         userId: "",
         token: "",
       };
@@ -42,15 +54,14 @@ const authReducer = (state = initialState, action) => {
         userId: action.payload.localId,
         token: action.payload.idToken,
       };
-    case "SET_AUTH_EMAIL":
+    case "SET_AUTH_INPUT_VALUE":
+      const { value, name } = action.payload;
       return {
         ...state,
-        email: action.payload,
-      };
-    case "SET_AUTH_PASS":
-      return {
-        ...state,
-        pass: action.payload,
+        [name]: {
+          ...state[name],
+          value: value,
+        },
       };
     case "AUTH_ERROR":
       return {
