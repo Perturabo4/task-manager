@@ -19,7 +19,7 @@ const App = ({ userId, autoLogin }) => {
     <>
       <Switch>
         <Route path="/" exact component={Auth} />
-        <Route path="/registration" component={Auth} />
+        <Route path="/registration" component={Registration} />
         {userId ? <Route path="/logout" component={Logout} /> : null}
         {userId ? <Route path="/app" component={AppContent} /> : null}
         <Redirect to={"/"} />
