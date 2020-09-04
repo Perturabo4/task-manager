@@ -7,6 +7,10 @@ const initialState = {
     value: "",
     errorMessage: null,
   },
+  confirmPass: {
+    value: "",
+    errorMessage: null,
+  },
   userId: "",
   token: "",
   authError: null,
