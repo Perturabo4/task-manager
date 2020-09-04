@@ -70,6 +70,7 @@ const authReducer = (state = initialState, action) => {
           value: value,
           errorMessage: inputValidation(name, value),
         },
+        authError: null,
       };
     case "AUTH_ERROR":
       return {
