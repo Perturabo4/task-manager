@@ -20,8 +20,6 @@ const Auth = ({
   if (userId) {
     return <Redirect to={"/app"} />;
   }
-  const buttonActive = !email.value || !pass.value ? "disabled" : "";
-  console.log(pass.value);
   return (
     <div className="auth-background">
       <form className="auth-form" onSubmit={(e) => e.preventDefault()}>
@@ -56,12 +54,12 @@ const Auth = ({
 
         {authError && <AuthError text={authError} />}
         <Button
-          cls={["red", buttonActive]}
+          cls={["red"]}
           text={"Войти"}
           onClick={() => authUser(email, pass)}
         />
         <Button
-          cls={["red", buttonActive]}
+          cls={["red"]}
           text={"Зарегистрироваться"}
           onClick={() => authUser(email, pass, true)}
         />
