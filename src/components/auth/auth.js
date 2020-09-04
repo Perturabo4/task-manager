@@ -20,6 +20,7 @@ const Auth = ({
   if (userId) {
     return <Redirect to={"/app"} />;
   }
+
   return (
     <div className="auth-background">
       <form className="auth-form" onSubmit={(e) => e.preventDefault()}>
@@ -27,7 +28,7 @@ const Auth = ({
           <input
             id="email"
             type="email"
-            className="validate"
+            className={email.errorMessage && "invalid"}
             name="email"
             value={email.value}
             onChange={(e) =>
@@ -35,13 +36,13 @@ const Auth = ({
             }
           />
           <label htmlFor="email">Email</label>
-          <span className="helper-text" data-error="Неверный e-mail"></span>
+          <span className="helper-text" data-error={email.errorMessage}></span>
         </div>
         <div className="input-field">
           <input
             id="password"
             type="password"
-            className="validate"
+            className={pass.errorMessage && "invalid"}
             name="pass"
             value={pass.value}
             onChange={(e) =>
@@ -49,14 +50,14 @@ const Auth = ({
             }
           />
           <label htmlFor="password">Пароль</label>
-          <span className="helper-text" data-error="wrong"></span>
+          <span className="helper-text" data-error={pass.errorMessage}></span>
         </div>
 
         {authError && <AuthError text={authError} />}
         <Button
           cls={["red"]}
           text={"Войти"}
-          onClick={() => authUser(email, pass)}
+          onClick={() => authUser(email.value, pass.value)}
         />
         <Button
           cls={["red"]}

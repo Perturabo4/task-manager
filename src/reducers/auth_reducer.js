@@ -17,6 +17,8 @@ const authErrorHandler = (errorText) => {
     ? errorText.slice(0, errorText.indexOf(" "))
     : errorText;
   switch (text) {
+    case "FIELDS_IS_EMPTY":
+      return "Заполните e-mail и пароль";
     case "INVALID_EMAIL":
       return "Некоректный e-mail";
     case "EMAIL_NOT_FOUND":
@@ -33,21 +35,26 @@ const authErrorHandler = (errorText) => {
   }
 };
 
+const inputValidation = (inpName, value) => {
+  const emailRegExp = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/;
+
+  switch (inpName) {
+    case "pass":
+      return value.trim().length >= 6 || !value
+        ? null
+        : "Пароль должен содержать не менее 6 символов";
+    case "email":
+      return emailRegExp.test(value) || !value ? null : "Некоректный e-mail";
+    default:
+      return null;
+  }
+};
+
 const authReducer = (state = initialState, action) => {
   switch (action.type) {
     case "AUTH_LOGOUT":
-      return {
-        email: {
-          value: "",
-          errorMessage: null,
-        },
-        pass: {
-          value: "",
-          errorMessage: null,
-        },
-        userId: "",
-        token: "",
-      };
+      return initialState;
+
     case "USER_AUTHENTICATED":
       return {
         ...state,
@@ -61,6 +68,7 @@ const authReducer = (state = initialState, action) => {
         [name]: {
           ...state[name],
           value: value,
+          errorMessage: inputValidation(name, value),
         },
       };
     case "AUTH_ERROR":

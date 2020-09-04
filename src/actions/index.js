@@ -172,6 +172,11 @@ const autoLogin = (dispatch) => {
 };
 
 const authUser = (dispatch, service) => async (email, pass, token) => {
+  if (!email.trim() || !pass.trim()) {
+    dispatch(authError("FIELDS_IS_EMPTY"));
+    return;
+  }
+
   const response = await service.auth(email, pass, token);
 
   const { expiresIn, idToken, localId, error } = response;
