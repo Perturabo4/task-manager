@@ -19,7 +19,7 @@ const CheckType = ({ id, type, cls = [], onChange, value, name, err }) => {
       return (
         <input
           id={id}
-          type="text"
+          type={type}
           className={classes}
           onChange={onChange}
           name={name}
