@@ -40,7 +40,7 @@ const authErrorHandler = (errorText) => {
 };
 
 const inputValidation = (inpName, value) => {
-  const emailRegExp = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/;
+  const emailRegExp = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(.\w{2,3})+$/;
 
   switch (inpName) {
     case "pass":
