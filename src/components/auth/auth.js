@@ -13,7 +13,16 @@ import AuthError from "../auth-error";
 import "./auth.scss";
 
 const Auth = (props) => {
-  const { email, pass, userId, setAuthInputValue, authUser, authError } = props;
+  const {
+    email,
+    pass,
+    confirmPass,
+    isRegistrationNewUser,
+    userId,
+    setAuthInputValue,
+    authUser,
+    authError,
+  } = props;
   if (userId) {
     return <Redirect to={"/app"} />;
   }
@@ -44,6 +53,20 @@ const Auth = (props) => {
           setAuthInputValue({ name: e.target.name, value: e.target.value })
         }
       />
+      {isRegistrationNewUser && (
+        <Input
+          id="confirmPassword"
+          type="password"
+          className={confirmPass.errorMessage && "invalid"}
+          name="confirmPass"
+          label="Подтвердите пароль"
+          value={confirmPass.value}
+          err={confirmPass.errorMessage}
+          onChange={(e) =>
+            setAuthInputValue({ name: e.target.name, value: e.target.value })
+          }
+        />
+      )}
       {props.children}
       {authError && <AuthError text={authError} />}
       <Button
@@ -51,10 +74,7 @@ const Auth = (props) => {
         text={"Войти"}
         onClick={() => authUser(email.value, pass.value)}
       />
-      {/* <Button cls={["red"]} text={"Зарегистрироваться"} onClick={() => {}} /> */}
-      <Link to={`/registration`} className="btn red">
-        Зарегистрироваться
-      </Link>
+      <Button cls={["red"]} text={"Зарегистрироваться"} onClick={() => {}} />
     </Form>
   );
 };

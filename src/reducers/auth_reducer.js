@@ -11,6 +11,7 @@ const initialState = {
     value: "",
     errorMessage: null,
   },
+  isRegistrationNewUser: false,
   userId: "",
   token: "",
   authError: null,
