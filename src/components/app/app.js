@@ -5,7 +5,6 @@ import { autoLogin } from "../../actions";
 import AppContent from "../app-content";
 import Logout from "../logout";
 import Auth from "../auth";
-import Registration from "../registration";
 import "materialize-css/dist/css/materialize.min.css";
 import "materialize-css/dist/js/materialize.min.js";
 import "./app.scss";
@@ -19,7 +18,6 @@ const App = ({ userId, autoLogin }) => {
     <>
       <Switch>
         <Route path="/" exact component={Auth} />
-        <Route path="/registration" component={Registration} />
         {userId ? <Route path="/logout" component={Logout} /> : null}
         {userId ? <Route path="/app" component={AppContent} /> : null}
         <Redirect to={"/"} />
