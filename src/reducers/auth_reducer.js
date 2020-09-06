@@ -40,7 +40,7 @@ const authErrorHandler = (errorText) => {
   }
 };
 
-const inputValidation = (inpName, value) => {
+const inputValidation = (inpName, value, state) => {
   const emailRegExp = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(.\w{2,3})+$/;
 
   switch (inpName) {
@@ -48,6 +48,10 @@ const inputValidation = (inpName, value) => {
       return value.trim().length >= 6 || !value
         ? null
         : "Пароль должен содержать не менее 6 символов";
+    case "confirmPass":
+      return value === state.pass.value || !value
+        ? null
+        : "Пароли не совпадают!";
     case "email":
       return emailRegExp.test(value) || !value ? null : "Некоректный e-mail";
     default:
@@ -77,7 +81,7 @@ const authReducer = (state = initialState, action) => {
         [name]: {
           ...state[name],
           value: value,
-          errorMessage: inputValidation(name, value),
+          errorMessage: inputValidation(name, value, state),
         },
         authError: null,
       };
