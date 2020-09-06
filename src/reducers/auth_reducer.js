@@ -59,12 +59,16 @@ const authReducer = (state = initialState, action) => {
   switch (action.type) {
     case "AUTH_LOGOUT":
       return initialState;
-
     case "USER_AUTHENTICATED":
       return {
         ...state,
         userId: action.payload.localId,
         token: action.payload.idToken,
+      };
+    case "SET_REGISTRATION":
+      return {
+        ...initialState,
+        isRegistrationNewUser: action.payload,
       };
     case "SET_AUTH_INPUT_VALUE":
       const { value, name } = action.payload;

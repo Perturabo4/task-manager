@@ -112,6 +112,13 @@ const setAuthInputValue = (obj) => {
   };
 };
 
+const setRegistration = (isRegistration) => {
+  return {
+    type: Types.SET_REGISTRATION,
+    payload: isRegistration,
+  };
+};
+
 const userAuthenticated = (userData) => {
   return {
     type: Types.USER_AUTHENTICATED,
@@ -272,4 +279,5 @@ export {
   logout,
   autoLogin,
   authError,
+  setRegistration,
 };

@@ -1,10 +1,9 @@
 import React from "react";
 import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
 import WithAuthService from "../hoc/with-auth-service";
 import { compose } from "../../utils";
-import { setAuthInputValue, authUser } from "../../actions";
+import { setAuthInputValue, setRegistration, authUser } from "../../actions";
 import Form from "../form";
 import Input from "../input";
 import Button from "../button";
@@ -20,6 +19,7 @@ const Auth = (props) => {
     isRegistrationNewUser,
     userId,
     setAuthInputValue,
+    setRegistration,
     authUser,
     authError,
   } = props;
@@ -67,14 +67,34 @@ const Auth = (props) => {
           }
         />
       )}
-      {props.children}
       {authError && <AuthError text={authError} />}
-      <Button
-        cls={["red"]}
-        text={"Войти"}
-        onClick={() => authUser(email.value, pass.value)}
-      />
-      <Button cls={["red"]} text={"Зарегистрироваться"} onClick={() => {}} />
+      {isRegistrationNewUser ? (
+        <>
+          <Button
+            cls={["red"]}
+            text={"Отмена"}
+            onClick={() => setRegistration(false)}
+          />
+          <Button
+            cls={["red"]}
+            text={"Готово"}
+            onClick={() => authUser(email.value, pass.value, true)}
+          />
+        </>
+      ) : (
+        <>
+          <Button
+            cls={["red"]}
+            text={"Войти"}
+            onClick={() => authUser(email.value, pass.value)}
+          />
+          <Button
+            cls={["red"]}
+            text={"Зарегистрироваться"}
+            onClick={() => setRegistration(true)}
+          />
+        </>
+      )}
     </Form>
   );
 };
@@ -85,6 +105,7 @@ const mapDispatchToProps = (dispatch, { AuthService }) => {
   return {
     setAuthInputValue: (obj) => dispatch(setAuthInputValue(obj)),
     authUser: authUser(dispatch, AuthService),
+    setRegistration: (bool) => dispatch(setRegistration(bool)),
   };
 };
 
