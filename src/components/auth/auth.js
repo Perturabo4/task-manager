@@ -67,7 +67,7 @@ const Auth = (props) => {
           label="Подтвердите пароль"
           value={confirmPass.value}
           err={confirmPass.errorMessage}
-          disabled={!pass.value}
+          disabled={!pass.value || pass.errorMessage}
           onChange={(e) =>
             setAuthInputValue({ name: e.target.name, value: e.target.value })
           }

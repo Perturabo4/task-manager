@@ -1,7 +1,16 @@
 import React from "react";
 import "./input.scss";
 
-const CheckType = ({ id, type, cls = [], onChange, value, name, err }) => {
+const CheckType = ({
+  id,
+  type,
+  cls = [],
+  onChange,
+  value,
+  name,
+  err,
+  disabled,
+}) => {
   const classes = [...cls, err ? "invalid" : ""].join(" ");
 
   switch (type) {
@@ -24,6 +33,7 @@ const CheckType = ({ id, type, cls = [], onChange, value, name, err }) => {
           onChange={onChange}
           name={name}
           value={value}
+          disabled={disabled}
         />
       );
   }
