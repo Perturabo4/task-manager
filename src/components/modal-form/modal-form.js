@@ -44,6 +44,7 @@ const ModalForm = ({
         <div className="modal-content">
           <Input
             id="task_title"
+            type="text"
             label="Заголовок"
             name="title"
             onChange={(e) =>
@@ -63,6 +64,7 @@ const ModalForm = ({
           />
           <Input
             id="task_img_src"
+            type="text"
             label="Ссылка на картинку"
             name="imgSrc"
             onChange={(e) =>
