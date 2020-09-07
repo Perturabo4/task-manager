@@ -78,6 +78,15 @@ const authReducer = (state = initialState, action) => {
       const { value, name } = action.payload;
       return {
         ...state,
+        confirmPass: {
+          value: state.confirmPass.value,
+          errorMessage:
+            state.confirmPass.value !==
+              (name === "pass" ? value : state.pass.value) &&
+            state.confirmPass.value
+              ? "Пароли не совпадают"
+              : null,
+        },
         [name]: {
           ...state[name],
           value: value,

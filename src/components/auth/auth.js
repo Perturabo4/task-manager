@@ -23,9 +23,14 @@ const Auth = (props) => {
     authUser,
     authError,
   } = props;
+
   if (userId) {
     return <Redirect to={"/app"} />;
   }
+
+  const hasFormError =
+    email.errorMessage || pass.errorMessage || confirmPass.errorMessage;
+  const hasFormValues = !email.value || !pass.value || !confirmPass.value;
 
   return (
     <Form>
@@ -62,6 +67,7 @@ const Auth = (props) => {
           label="Подтвердите пароль"
           value={confirmPass.value}
           err={confirmPass.errorMessage}
+          disabled={!pass.value}
           onChange={(e) =>
             setAuthInputValue({ name: e.target.name, value: e.target.value })
           }
@@ -76,7 +82,7 @@ const Auth = (props) => {
             onClick={() => setRegistration(false)}
           />
           <Button
-            cls={["red"]}
+            cls={["red", hasFormError || hasFormValues ? "disabled" : ""]}
             text={"Готово"}
             onClick={() => authUser(email.value, pass.value, true)}
           />
