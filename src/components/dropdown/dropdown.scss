@@ -1,17 +1,16 @@
 .dropdown-wrapper {
+  position: relative;
+  display: inline-block;
 
-    position: relative;
-    display: inline-block;
-
-    &.active {
-        .dropdown-content {
-            display: block;
-            opacity: 1;
-            right: 0;
-            bottom: 0;
-            left: initial;
-            top: initial;
-        }
+  &.active {
+    .dropdown-content {
+      margin-bottom: 10px;
+      display: block;
+      opacity: 1;
+      right: 0;
+      bottom: 0;
+      left: initial;
+      top: initial;
     }
-
+  }
 }

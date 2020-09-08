@@ -1,38 +1,44 @@
 .card {
+  .card-shadow {
+    display: none;
+  }
+
+  &.done,
+  &.inProgres {
     .card-shadow {
-        display: none;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: 90;
     }
+  }
 
-    &.done,
-    &.inProgres {
-        .card-shadow {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: absolute;
-            top: 0;
-            left: 0;
-            bottom: 0;
-            right: 0;
-            background: rgba(0,0,0, .6);
-            z-index: 90;
-        }
+  label {
+    position: absolute;
+    z-index: 100;
+    right: 0;
+    transform: translate(60%, -20%);
+  }
+
+  .card-content {
+    text-align: left;
+  }
+  .card-image {
+    .card-title {
+      background: rgba(0, 0, 0, 0.3);
+      right: 0;
+      top: 0;
+      text-align: left;
     }
-
-    label {
-        position: absolute;
-        z-index: 100;
-        right: 0;
-        transform: translate(60%, -20%);
-    }
-
-    .card-content {
-        text-align: left;
-    }
-
-    .card-action {
-        display: flex;
-        justify-content: space-between;
-    }
-
+  }
+  .card-action {
+    display: flex;
+    justify-content: space-between;
+  }
 }
