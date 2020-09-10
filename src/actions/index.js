@@ -149,6 +149,12 @@ const authError = (error) => {
   };
 };
 
+const setDateAdd = () => {
+  return {
+    type: Types.SET_DATE_ADD,
+  };
+};
+
 const validateTaskBeforeCreate = (task) => {
   return {
     type: Types.VALIDATE_TASK_BEFORE_CREATE,
@@ -280,4 +286,5 @@ export {
   autoLogin,
   authError,
   setRegistration,
+  setDateAdd,
 };

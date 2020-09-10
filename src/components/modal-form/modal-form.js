@@ -12,6 +12,7 @@ import {
   createTask,
   updateTask,
   validateTaskBeforeCreate,
+  setDateAdd,
 } from "../../actions";
 import "./modal-form.scss";
 
@@ -25,6 +26,7 @@ const ModalForm = ({
   setPriority,
   createTask,
   updateTask,
+  setDateAdd,
 }) => {
   const { userId } = auth;
 
@@ -106,6 +108,7 @@ const mapDispatchToProps = (dispatch, { TaskService }) => {
     updateTask: updateTask(dispatch, TaskService),
     validateTaskBeforeCreate: (task) =>
       dispatch(validateTaskBeforeCreate(task)),
+    setDateAdd: () => dispatch(setDateAdd()),
   };
 };
 
